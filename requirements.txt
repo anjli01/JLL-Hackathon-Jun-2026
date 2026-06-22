@@ -1,0 +1,19 @@
+fastapi
+uvicorn
+httpx
+beautifulsoup4
+xgboost
+shap
+pytest
+geopy
+pandas
+pydantic
+python-multipart
+scikit-learn
+# Stage 2: RAG + Agent
+langchain>=0.3
+langgraph>=0.4
+langchain-google-genai>=2.0
+chromadb>=1.0
+jinja2
+weasyprint

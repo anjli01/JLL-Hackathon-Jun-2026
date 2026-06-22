@@ -1,0 +1,18 @@
+# Virtual environment
+venv/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# macOS metadata
+.DS_Store
+**/.DS_Store
+
+# Data and databases
+data/chroma_db/
+data/climate_nexus.db
+
+# Environment variables
+.env
+*.env

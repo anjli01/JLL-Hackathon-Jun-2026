@@ -1,0 +1,1701 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ClimateNexus — JLL 2026 Hackathon Pitch Deck</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    /* ===== RESET & BASE ===== */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { font-size: 16px; scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #0a0e17;
+      color: #e2e8f0;
+      overflow: hidden;
+      height: 100vh;
+      width: 100vw;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ===== CSS VARIABLES ===== */
+    :root {
+      --jll-red: #e4002b;
+      --jll-red-glow: rgba(228, 0, 43, 0.35);
+      --accent-green: #22d3a7;
+      --accent-green-glow: rgba(34, 211, 167, 0.3);
+      --accent-blue: #38bdf8;
+      --accent-amber: #fbbf24;
+      --accent-purple: #a78bfa;
+      --bg-dark: #0a0e17;
+      --bg-card: rgba(15, 23, 42, 0.7);
+      --bg-card-border: rgba(255, 255, 255, 0.06);
+      --text-primary: #f1f5f9;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+      --glass: rgba(255, 255, 255, 0.03);
+      --glass-border: rgba(255, 255, 255, 0.08);
+    }
+
+    /* ===== SLIDE CONTAINER ===== */
+    .deck {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+    }
+
+    .slide {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 3rem 5rem;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(30px) scale(0.98);
+      transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+                  visibility 0.6s;
+      z-index: 0;
+    }
+
+    .slide.active {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0) scale(1);
+      z-index: 10;
+    }
+
+    .slide.exit-up {
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-30px) scale(0.98);
+    }
+
+    /* ===== BACKGROUND EFFECTS ===== */
+    .bg-glow {
+      position: fixed;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      filter: blur(120px);
+      opacity: 0.12;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .bg-glow.glow-1 {
+      top: -200px;
+      right: -100px;
+      background: var(--jll-red);
+      animation: floatGlow 12s ease-in-out infinite;
+    }
+
+    .bg-glow.glow-2 {
+      bottom: -200px;
+      left: -100px;
+      background: var(--accent-green);
+      animation: floatGlow 15s ease-in-out infinite reverse;
+    }
+
+    .bg-glow.glow-3 {
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 400px;
+      height: 400px;
+      background: var(--accent-blue);
+      opacity: 0.06;
+      animation: floatGlow 18s ease-in-out infinite;
+    }
+
+    @keyframes floatGlow {
+      0%, 100% { transform: translate(0, 0); }
+      33% { transform: translate(30px, -20px); }
+      66% { transform: translate(-20px, 30px); }
+    }
+
+    /* Grid background */
+    .bg-grid {
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+      background-size: 60px 60px;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    /* ===== TYPOGRAPHY ===== */
+    .slide-label {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--jll-red);
+      margin-bottom: 1rem;
+      position: relative;
+    }
+
+    .slide-label::before {
+      content: '';
+      display: inline-block;
+      width: 24px;
+      height: 2px;
+      background: var(--jll-red);
+      vertical-align: middle;
+      margin-right: 10px;
+    }
+
+    h1 {
+      font-size: 4rem;
+      font-weight: 900;
+      line-height: 1.05;
+      letter-spacing: -2px;
+      color: var(--text-primary);
+    }
+
+    h2 {
+      font-size: 2.8rem;
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -1.5px;
+      color: var(--text-primary);
+    }
+
+    h3 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .subtitle {
+      font-size: 1.3rem;
+      font-weight: 400;
+      color: var(--text-secondary);
+      line-height: 1.5;
+      max-width: 700px;
+      margin-top: 1rem;
+    }
+
+    .big-number {
+      font-size: 4rem;
+      font-weight: 900;
+      letter-spacing: -2px;
+      line-height: 1;
+    }
+
+    /* ===== LAYOUT UTILITIES ===== */
+    .content-center {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .content-left {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      text-align: left;
+      width: 100%;
+      max-width: 1200px;
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      width: 100%;
+      max-width: 1200px;
+      align-items: start;
+    }
+
+    .three-col {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      width: 100%;
+      max-width: 1200px;
+    }
+
+    .four-col {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.2rem;
+      width: 100%;
+      max-width: 1200px;
+    }
+
+    /* ===== CARDS ===== */
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--bg-card-border);
+      border-radius: 16px;
+      padding: 2rem;
+      backdrop-filter: blur(10px);
+      transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(255, 255, 255, 0.12);
+      box-shadow: 0 20px 60px -20px rgba(0, 0, 0, 0.5);
+    }
+
+    .card-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .card-icon.red { background: rgba(228, 0, 43, 0.15); }
+    .card-icon.green { background: rgba(34, 211, 167, 0.15); }
+    .card-icon.blue { background: rgba(56, 189, 248, 0.15); }
+    .card-icon.amber { background: rgba(251, 191, 36, 0.15); }
+    .card-icon.purple { background: rgba(167, 139, 250, 0.15); }
+
+    .card p {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin-top: 0.5rem;
+    }
+
+    /* ===== SPECIAL COMPONENTS ===== */
+    .gradient-text {
+      background: linear-gradient(135deg, var(--accent-green), var(--accent-blue));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .gradient-text-warm {
+      background: linear-gradient(135deg, var(--jll-red), var(--accent-amber));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border-radius: 100px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    .pill.red { background: rgba(228, 0, 43, 0.15); color: #f87171; }
+    .pill.green { background: rgba(34, 211, 167, 0.15); color: var(--accent-green); }
+    .pill.blue { background: rgba(56, 189, 248, 0.15); color: var(--accent-blue); }
+    .pill.amber { background: rgba(251, 191, 36, 0.15); color: var(--accent-amber); }
+
+    .divider {
+      width: 60px;
+      height: 3px;
+      border-radius: 2px;
+      background: linear-gradient(90deg, var(--jll-red), transparent);
+      margin: 1.5rem 0;
+    }
+
+    /* ===== PIPELINE VISUAL ===== */
+    .pipeline {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      width: 100%;
+      max-width: 1100px;
+      margin-top: 2rem;
+    }
+
+    .pipeline-stage {
+      flex: 1;
+      padding: 1.8rem 1.5rem;
+      border-radius: 16px;
+      text-align: center;
+      position: relative;
+      border: 1px solid var(--bg-card-border);
+      backdrop-filter: blur(10px);
+    }
+
+    .pipeline-stage.stage-input {
+      background: rgba(56, 189, 248, 0.06);
+      border-color: rgba(56, 189, 248, 0.15);
+    }
+
+    .pipeline-stage.stage-score {
+      background: rgba(228, 0, 43, 0.06);
+      border-color: rgba(228, 0, 43, 0.15);
+    }
+
+    .pipeline-stage.stage-bridge {
+      background: rgba(167, 139, 250, 0.06);
+      border-color: rgba(167, 139, 250, 0.15);
+    }
+
+    .pipeline-stage.stage-strategy {
+      background: rgba(34, 211, 167, 0.06);
+      border-color: rgba(34, 211, 167, 0.15);
+    }
+
+    .pipeline-stage.stage-output {
+      background: rgba(251, 191, 36, 0.06);
+      border-color: rgba(251, 191, 36, 0.15);
+    }
+
+    .pipeline-arrow {
+      font-size: 1.5rem;
+      color: var(--text-muted);
+      flex-shrink: 0;
+      padding: 0 0.3rem;
+    }
+
+    .pipeline-stage h4 {
+      font-size: 0.9rem;
+      font-weight: 700;
+      margin-bottom: 0.4rem;
+    }
+
+    .pipeline-stage p {
+      font-size: 0.72rem;
+      color: var(--text-secondary);
+      line-height: 1.4;
+    }
+
+    .pipeline-stage .stage-icon {
+      font-size: 1.8rem;
+      margin-bottom: 0.6rem;
+    }
+
+    /* ===== STAT CARDS ===== */
+    .stat-card {
+      text-align: center;
+      padding: 2rem 1.5rem;
+    }
+
+    .stat-card .big-number {
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-card .stat-label {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      font-weight: 500;
+    }
+
+    /* ===== TECH STACK TABLE ===== */
+    .tech-grid {
+      display: grid;
+      grid-template-columns: 160px 1fr;
+      gap: 0;
+      width: 100%;
+      max-width: 900px;
+      border: 1px solid var(--bg-card-border);
+      border-radius: 16px;
+      overflow: hidden;
+      background: var(--bg-card);
+    }
+
+    .tech-row {
+      display: contents;
+    }
+
+    .tech-row > * {
+      padding: 1rem 1.5rem;
+      border-bottom: 1px solid var(--bg-card-border);
+      display: flex;
+      align-items: center;
+    }
+
+    .tech-row:last-child > * {
+      border-bottom: none;
+    }
+
+    .tech-layer {
+      font-weight: 700;
+      font-size: 0.8rem;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      background: rgba(255, 255, 255, 0.02);
+      border-right: 1px solid var(--bg-card-border);
+    }
+
+    .tech-items {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .tech-tag {
+      padding: 5px 12px;
+      border-radius: 8px;
+      font-size: 0.78rem;
+      font-weight: 500;
+      font-family: 'JetBrains Mono', monospace;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: var(--text-secondary);
+    }
+
+    .tech-tag.highlight {
+      background: rgba(34, 211, 167, 0.1);
+      border-color: rgba(34, 211, 167, 0.2);
+      color: var(--accent-green);
+    }
+
+    /* ===== TIMELINE ===== */
+    .timeline {
+      width: 100%;
+      max-width: 1000px;
+      position: relative;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 120px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--jll-red), var(--accent-green));
+      border-radius: 2px;
+    }
+
+    .timeline-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 2rem;
+      padding: 1rem 0;
+      position: relative;
+    }
+
+    .timeline-time {
+      width: 100px;
+      text-align: right;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--accent-amber);
+      flex-shrink: 0;
+      padding-top: 2px;
+    }
+
+    .timeline-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--jll-red);
+      border: 2px solid var(--bg-dark);
+      flex-shrink: 0;
+      margin-top: 4px;
+      box-shadow: 0 0 10px var(--jll-red-glow);
+      z-index: 1;
+    }
+
+    .timeline-content h4 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      margin-bottom: 0.3rem;
+    }
+
+    .timeline-content p {
+      font-size: 0.82rem;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    /* ===== DEMO STEPS ===== */
+    .demo-step {
+      display: flex;
+      align-items: flex-start;
+      gap: 1.2rem;
+      padding: 1.2rem 0;
+    }
+
+    .demo-step-num {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--jll-red), #ff4466);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 0.9rem;
+      flex-shrink: 0;
+      color: #fff;
+    }
+
+    .demo-step-content h4 {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 0.3rem;
+    }
+
+    .demo-step-content p {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    /* ===== NAVIGATION ===== */
+    .nav-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 56px;
+      background: rgba(10, 14, 23, 0.85);
+      backdrop-filter: blur(20px);
+      border-top: 1px solid var(--glass-border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2rem;
+      z-index: 100;
+    }
+
+    .nav-progress {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .nav-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.15);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .nav-dot.active {
+      background: var(--jll-red);
+      box-shadow: 0 0 10px var(--jll-red-glow);
+      width: 24px;
+      border-radius: 4px;
+    }
+
+    .nav-dot:hover:not(.active) {
+      background: rgba(255, 255, 255, 0.3);
+    }
+
+    .nav-controls {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .nav-btn {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: var(--text-secondary);
+      padding: 8px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 600;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .nav-btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.2);
+      color: var(--text-primary);
+    }
+
+    .nav-counter {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      font-weight: 500;
+      font-variant-numeric: tabular-nums;
+      min-width: 50px;
+      text-align: center;
+    }
+
+    .nav-brand {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      font-weight: 500;
+      letter-spacing: 1px;
+    }
+
+    /* ===== ANIMATED ELEMENTS ===== */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+
+    .slide.active .fade-in {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .slide.active .fade-in:nth-child(2) { transition-delay: 0.1s; }
+    .slide.active .fade-in:nth-child(3) { transition-delay: 0.2s; }
+    .slide.active .fade-in:nth-child(4) { transition-delay: 0.3s; }
+    .slide.active .fade-in:nth-child(5) { transition-delay: 0.4s; }
+    .slide.active .fade-in:nth-child(6) { transition-delay: 0.5s; }
+
+    .stagger > * {
+      opacity: 0;
+      transform: translateY(15px);
+      transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+
+    .slide.active .stagger > *:nth-child(1) { opacity: 1; transform: translateY(0); transition-delay: 0.15s; }
+    .slide.active .stagger > *:nth-child(2) { opacity: 1; transform: translateY(0); transition-delay: 0.25s; }
+    .slide.active .stagger > *:nth-child(3) { opacity: 1; transform: translateY(0); transition-delay: 0.35s; }
+    .slide.active .stagger > *:nth-child(4) { opacity: 1; transform: translateY(0); transition-delay: 0.45s; }
+    .slide.active .stagger > *:nth-child(5) { opacity: 1; transform: translateY(0); transition-delay: 0.55s; }
+    .slide.active .stagger > *:nth-child(6) { opacity: 1; transform: translateY(0); transition-delay: 0.65s; }
+
+    /* ===== TITLE SLIDE SPECIAL ===== */
+    .title-hero {
+      position: relative;
+    }
+
+    .title-hero h1 {
+      font-size: 5.5rem;
+      letter-spacing: -3px;
+      line-height: 1;
+    }
+
+    .title-tagline {
+      font-size: 1.6rem;
+      font-weight: 300;
+      color: var(--text-secondary);
+      margin-top: 1.2rem;
+      letter-spacing: -0.5px;
+    }
+
+    .title-meta {
+      display: flex;
+      gap: 2rem;
+      margin-top: 2.5rem;
+      align-items: center;
+    }
+
+    .title-badge {
+      padding: 10px 20px;
+      border-radius: 12px;
+      background: rgba(228, 0, 43, 0.1);
+      border: 1px solid rgba(228, 0, 43, 0.2);
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #f87171;
+    }
+
+    .title-date {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    /* ===== IMPACT ROW ===== */
+    .impact-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+      width: 100%;
+      max-width: 1100px;
+      margin-top: 2rem;
+    }
+
+    .impact-card {
+      text-align: center;
+      padding: 2rem 1rem;
+      border-radius: 16px;
+      background: var(--bg-card);
+      border: 1px solid var(--bg-card-border);
+    }
+
+    .impact-card .impact-num {
+      font-size: 3rem;
+      font-weight: 900;
+      letter-spacing: -2px;
+      line-height: 1.1;
+    }
+
+    .impact-card .impact-label {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      margin-top: 0.5rem;
+      line-height: 1.4;
+    }
+
+    /* ===== QUOTE ===== */
+    .quote-block {
+      max-width: 800px;
+      padding: 2.5rem;
+      border-left: 3px solid var(--jll-red);
+      background: rgba(228, 0, 43, 0.04);
+      border-radius: 0 16px 16px 0;
+      margin: 1.5rem 0;
+    }
+
+    .quote-block p {
+      font-size: 1.3rem;
+      font-weight: 400;
+      font-style: italic;
+      color: var(--text-primary);
+      line-height: 1.6;
+    }
+
+    .quote-block cite {
+      display: block;
+      margin-top: 1rem;
+      font-size: 0.85rem;
+      font-style: normal;
+      color: var(--text-muted);
+    }
+
+    /* ===== CTA SLIDE ===== */
+    .cta-actions {
+      display: flex;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .cta-btn {
+      padding: 14px 32px;
+      border-radius: 12px;
+      font-size: 1rem;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      transition: all 0.3s ease;
+    }
+
+    .cta-btn.primary {
+      background: linear-gradient(135deg, var(--jll-red), #ff2244);
+      color: #fff;
+      box-shadow: 0 8px 30px -8px var(--jll-red-glow);
+    }
+
+    .cta-btn.primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 40px -8px var(--jll-red-glow);
+    }
+
+    .cta-btn.secondary {
+      background: rgba(255, 255, 255, 0.06);
+      color: var(--text-primary);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .cta-btn.secondary:hover {
+      background: rgba(255, 255, 255, 0.1);
+      transform: translateY(-2px);
+    }
+
+    /* ===== DATA SOURCE PILLS ===== */
+    .source-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 1rem;
+    }
+
+    .source-pill {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 16px;
+      border-radius: 12px;
+      background: var(--bg-card);
+      border: 1px solid var(--bg-card-border);
+      font-size: 0.82rem;
+      font-weight: 500;
+      transition: border-color 0.3s ease;
+    }
+
+    .source-pill:hover {
+      border-color: rgba(255, 255, 255, 0.15);
+    }
+
+    .source-pill .source-icon {
+      font-size: 1.1rem;
+    }
+
+    .source-pill .source-label {
+      color: var(--text-secondary);
+    }
+
+    .source-pill .source-name {
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+
+    /* ===== PROBLEM STAT BARS ===== */
+    .problem-stats {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+      width: 100%;
+    }
+
+    .problem-stat {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .problem-stat-label {
+      width: 200px;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      text-align: right;
+      flex-shrink: 0;
+    }
+
+    .problem-stat-bar {
+      flex: 1;
+      height: 32px;
+      background: rgba(255, 255, 255, 0.04);
+      border-radius: 8px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .problem-stat-fill {
+      height: 100%;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      padding: 0 12px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: #fff;
+      width: 0;
+      transition: width 1s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .slide.active .problem-stat-fill { width: var(--target-width); }
+
+    .problem-stat-fill.fill-red { background: linear-gradient(90deg, var(--jll-red), #ff4466); }
+    .problem-stat-fill.fill-amber { background: linear-gradient(90deg, #f59e0b, var(--accent-amber)); }
+    .problem-stat-fill.fill-blue { background: linear-gradient(90deg, #0ea5e9, var(--accent-blue)); }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 900px) {
+      .slide { padding: 2rem; }
+      h1 { font-size: 2.5rem; }
+      .title-hero h1 { font-size: 3rem; }
+      h2 { font-size: 1.8rem; }
+      .two-col, .three-col, .four-col { grid-template-columns: 1fr; }
+      .pipeline { flex-direction: column; }
+      .pipeline-arrow { transform: rotate(90deg); }
+      .impact-row { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    /* ===== AGENT VISUAL ===== */
+    .agent-flow {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      width: 100%;
+    }
+
+    .agent-step {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 0.9rem 1.2rem;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--bg-card-border);
+    }
+
+    .agent-step-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+
+    .agent-step p {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+    }
+
+    .agent-step p strong {
+      color: var(--text-primary);
+    }
+
+    /* ===== SOLUTION SECTION BADGES ===== */
+    .section-badges {
+      display: flex;
+      gap: 0.6rem;
+      margin-bottom: 1.2rem;
+      flex-wrap: wrap;
+    }
+
+    /* Key insight callout */
+    .insight-box {
+      padding: 1.2rem 1.5rem;
+      border-radius: 12px;
+      border: 1px solid rgba(34, 211, 167, 0.2);
+      background: rgba(34, 211, 167, 0.05);
+      margin-top: 1.5rem;
+      max-width: 1100px;
+      width: 100%;
+    }
+
+    .insight-box p {
+      font-size: 0.95rem;
+      color: var(--accent-green);
+      font-weight: 500;
+    }
+
+    .insight-box p strong {
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+  <!-- Background effects -->
+  <div class="bg-grid"></div>
+  <div class="bg-glow glow-1"></div>
+  <div class="bg-glow glow-2"></div>
+  <div class="bg-glow glow-3"></div>
+
+  <div class="deck" id="deck">
+    <!-- ====== SLIDE 1: TITLE ====== -->
+    <div class="slide active" data-slide="0">
+      <div class="content-center title-hero">
+        <div class="fade-in section-badges">
+          <span class="pill red">PROBLEM #12</span>
+          <span class="pill green">PROBLEM #13</span>
+        </div>
+        <h1 class="fade-in">Climate<span class="gradient-text">Nexus</span></h1>
+        <p class="title-tagline fade-in">Score the risk. Prescribe the cure.</p>
+        <p class="subtitle fade-in" style="max-width: 600px; margin-top: 1.5rem; font-size: 1.05rem;">
+          An end-to-end AI platform that scores climate risk on any property — then auto-generates a tailored sustainability strategy for the client.
+        </p>
+        <div class="title-meta fade-in">
+          <span class="title-badge">JLL 2026 Hackathon</span>
+          <span class="title-date">Anjali Gupta (Data Engineer)</span>
+          <span class="title-date">Climate-Risk Scoring × Client Sustainability Strategy</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ====== SLIDE 2: THE PROBLEM ====== -->
+    <div class="slide" data-slide="1">
+      <div class="content-left">
+        <span class="slide-label fade-in">The Problem</span>
+        <h2 class="fade-in">Climate risk data is<br><span class="gradient-text-warm">fragmented & manual</span></h2>
+        <p class="subtitle fade-in" style="margin-bottom: 2rem;">
+          Brokers and asset managers spend days stitching together flood maps, weather data, building codes, and regulatory requirements — for a single property.
+        </p>
+        <div class="two-col stagger" style="margin-top: 1rem;">
+          <div>
+            <div class="problem-stats">
+              <div class="problem-stat">
+                <span class="problem-stat-label">Data sources to check</span>
+                <div class="problem-stat-bar">
+                  <div class="problem-stat-fill fill-red" style="--target-width: 85%;">8–12 per property</div>
+                </div>
+              </div>
+              <div class="problem-stat">
+                <span class="problem-stat-label">Time per risk assessment</span>
+                <div class="problem-stat-bar">
+                  <div class="problem-stat-fill fill-amber" style="--target-width: 70%;">3–5 days manual</div>
+                </div>
+              </div>
+              <div class="problem-stat">
+                <span class="problem-stat-label">Strategy creation effort</span>
+                <div class="problem-stat-bar">
+                  <div class="problem-stat-fill fill-blue" style="--target-width: 90%;">Weeks per client</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="card" style="border-color: rgba(228, 0, 43, 0.15);">
+              <h3 style="color: #f87171;">Two disconnected worlds</h3>
+              <div class="divider"></div>
+              <p><strong style="color: var(--text-primary);">Risk scoring</strong> — data science team runs models, produces reports that sit in spreadsheets</p>
+              <br/>
+              <p><strong style="color: var(--text-primary);">Strategy creation</strong> — sustainability consultants manually build decks, often without access to the latest risk data</p>
+              <br/>
+              <p style="color: var(--accent-amber); font-weight: 600;">The risk score never flows into the strategy. The strategy never references the risk.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ====== SLIDE 3: THE SOLUTION ====== -->
+    <div class="slide" data-slide="2">
+      <div class="content-center">
+        <span class="slide-label fade-in">The Solution</span>
+        <h2 class="fade-in">One pipeline.<br><span class="gradient-text">Risk → Intelligence → Action.</span></h2>
+        <p class="subtitle fade-in" style="margin-bottom: 2rem;">
+          ClimateNexus chains climate-risk scoring directly into an AI sustainability strategist — so the risk score <em>drives</em> the recommendations.
+        </p>
+        <div class="pipeline stagger">
+          <div class="pipeline-stage stage-input">
+            <div class="stage-icon">📍</div>
+            <h4 style="color: var(--accent-blue);">Input</h4>
+            <p>Address, portfolio CSV, or property ID</p>
+          </div>
+          <span class="pipeline-arrow">→</span>
+          <div class="pipeline-stage stage-score">
+            <div class="stage-icon">⚡</div>
+            <h4 style="color: #f87171;">Score</h4>
+            <p>ML model scores flood, heat, wildfire & transition risk</p>
+          </div>
+          <span class="pipeline-arrow">→</span>
+          <div class="pipeline-stage stage-bridge">
+            <div class="stage-icon">🔗</div>
+            <h4 style="color: var(--accent-purple);">Bridge</h4>
+            <p>Risk signals become agent context for strategy</p>
+          </div>
+          <span class="pipeline-arrow">→</span>
+          <div class="pipeline-stage stage-strategy">
+            <div class="stage-icon">🤖</div>
+            <h4 style="color: var(--accent-green);">Strategize</h4>
+            <p>RAG Agent generates tailored client recommendations</p>
+          </div>
+          <span class="pipeline-arrow">→</span>
+          <div class="pipeline-stage stage-output">
+            <div class="stage-icon">📑</div>
+            <h4 style="color: var(--accent-amber);">Deliver</h4>
+            <p>Client-ready strategy deck + financial model</p>
+          </div>
+        </div>
+        <div class="insight-box fade-in">
+          <p>💡 <strong>Key insight:</strong> Most teams will tackle scoring OR strategy. We connect both — mirroring how JLL's advisory actually works.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ====== SLIDE 4: STAGE 1 — CLIMATE SCORING ====== -->
+    <div class="slide" data-slide="3">
+      <div class="content-left">
+        <span class="slide-label fade-in">Stage 1</span>
+        <h2 class="fade-in">Multi-Hazard<br><span class="gradient-text-warm">Climate Risk Scoring</span></h2>
+        <p class="subtitle fade-in" style="margin-bottom: 2rem;">
+          ML-powered engine that ingests open climate data and produces an explainable composite risk score (0–100) per property.
+        </p>
+        <div class="two-col stagger">
+          <div>
+            <h3 style="margin-bottom: 1rem;">Hazard Dimensions</h3>
+            <div class="three-col" style="gap: 0.8rem;">
+              <div class="card" style="padding: 1.2rem; text-align: center;">
+                <div style="font-size: 2rem; margin-bottom: 0.5rem;">🌊</div>
+                <h4 style="font-size: 0.85rem;">Flood</h4>
+                <p style="font-size: 0.75rem;">FEMA zones, elevation, historical claims</p>
+              </div>
+              <div class="card" style="padding: 1.2rem; text-align: center;">
+                <div style="font-size: 2rem; margin-bottom: 0.5rem;">🌡️</div>
+                <h4 style="font-size: 0.85rem;">Heat Stress</h4>
+                <p style="font-size: 0.75rem;">NOAA projections, cooling degree days</p>
+              </div>
+              <div class="card" style="padding: 1.2rem; text-align: center;">
+                <div style="font-size: 2rem; margin-bottom: 0.5rem;">🔥</div>
+                <h4 style="font-size: 0.85rem;">Wildfire</h4>
+                <p style="font-size: 0.75rem;">NIFC perimeters, burn probability</p>
+              </div>
+            </div>
+            <div class="card" style="padding: 1.2rem; text-align: center; margin-top: 0.8rem;">
+              <div style="font-size: 2rem; margin-bottom: 0.5rem;">⚖️</div>
+              <h4 style="font-size: 0.85rem;">Transition Risk</h4>
+              <p style="font-size: 0.75rem;">LL97, BERDO, building performance standards — regulatory exposure</p>
+            </div>
+          </div>
+          <div>
+            <h3 style="margin-bottom: 1rem;">ML Architecture</h3>
+            <div class="card" style="padding: 1.5rem;">
+              <div style="display: flex; flex-direction: column; gap: 0.8rem;">
+                <div class="agent-step">
+                  <div class="agent-step-icon" style="background: rgba(56, 189, 248, 0.15);">📥</div>
+                  <p><strong>Feature engineering</strong> — geospatial + temporal features from public APIs</p>
+                </div>
+                <div class="agent-step">
+                  <div class="agent-step-icon" style="background: rgba(228, 0, 43, 0.15);">🧠</div>
+                  <p><strong>XGBoost ensemble</strong> — per-hazard sub-models combined into composite score</p>
+                </div>
+                <div class="agent-step">
+                  <div class="agent-step-icon" style="background: rgba(167, 139, 250, 0.15);">🔍</div>
+                  <p><strong>SHAP explainability</strong> — shows which hazards drive the score</p>
+                </div>
+                <div class="agent-step">
+                  <div class="agent-step-icon" style="background: rgba(34, 211, 167, 0.15);">💲</div>
+                  <p><strong>Financial calibration</strong> — score mapped to expected annual loss ($)</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ====== SLIDE 5: DATA SOURCES ====== -->
+    <div class="slide" data-slide="4">
+      <div class="content-left">
+        <span class="slide-label fade-in">Data Layer</span>
+        <h2 class="fade-in">Open Data.<br><span class="gradient-text">Zero licensing costs.</span></h2>
+        <p class="subtitle fade-in" style="margin-bottom: 2rem;">
+          Every data source is publicly available — no vendor lock-in, no procurement delays.
+        </p>
+        <div class="three-col stagger" style="margin-bottom: 1.5rem;">
+          <div class="card">
+            <div class="card-icon blue">🌊</div>
+            <h3>FEMA NFHL</h3>
+            <p>National Flood Hazard Layer — flood zones, base flood elevation, SFHA classification</p>
+            <div style="margin-top: 0.8rem;">
+              <span class="pill blue" style="font-size: 0.7rem;">REST API</span>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-icon amber">🌡️</div>
+            <h3>NOAA NCEI</h3>
+            <p>Climate normals, historical weather extremes, heat projections (RCP 4.5 & 8.5)</p>
+            <div style="margin-top: 0.8rem;">
+              <span class="pill amber" style="font-size: 0.7rem;">REST API</span>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-icon red">🔥</div>
+            <h3>NIFC / GeoMAC</h3>
+            <p>Wildfire perimeters, burn probability, historical fire data as GeoJSON</p>
+            <div style="margin-top: 0.8rem;">
+              <span class="pill red" style="font-size: 0.7rem;">GeoJSON</span>
+            </div>
+          </div>
+        </div>
+        <div class="source-grid fade-in">
+          <div class="source-pill">
+            <span class="source-icon">🏔️</span>
+            <span class="source-name">USGS Elevation</span>
+          </div>
+          <div class="source-pill">
+            <span class="source-icon">⚡</span>
+            <span class="source-name">EPA ENERGY STAR</span>
+          </div>
+          <div class="source-pill">
+            <span class="source-icon">🗺️</span>
+            <span class="source-name">OpenStreetMap</span>
+          </div>
+          <div class="source-pill">
+            <span class="source-icon">📜</span>
+            <span class="source-name">Local Gov Portals</span>
+            <span class="source-label">(scraped)</span>
+          </div>
+          <div class="source-pill">
+            <span class="source-icon">🏛️</span>
+            <span class="source-name">DSIRE Incentives DB</span>
+          </div>
+          <div class="source-pill">
+            <span class="source-icon">📄</span>
+            <span class="source-name">LEED / WELL Guides</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ====== SLIDE 6: STAGE 2 — AI STRATEGY AGENT ====== -->
+    <div class="slide" data-slide="5">
+      <div class="content-left">
+        <span class="slide-label fade-in">Stage 2</span>
+        <h2 class="fade-in">RAG-Powered<br><span class="gradient-text">Sustainability Strategist</span></h2>
+        <p class="subtitle fade-in" style="margin-bottom: 2rem;">
+          An AI agent that takes the risk scores and — through RAG over sustainability knowledge — generates a customized action plan.
+        </p>
+        <div class="two-col stagger">
+          <div>
+            <h3 style="margin-bottom: 1rem;">Agent Tools</h3>
+            <div class="agent-flow">
+              <div class="agent-step">
+                <div class="agent-step-icon" style="background: rgba(56, 189, 248, 0.15);">🔍</div>
+                <p><strong>RAG Retriever</strong> — queries sustainability knowledge base (LEED, LL97, IRA credits)</p>
+              </div>
+              <div class="agent-step">
+                <div class="agent-step-icon" style="background: rgba(34, 211, 167, 0.15);">📊</div>
+                <p><strong>Portfolio Analyzer</strong> — parses client energy data, certifications, building profiles</p>
+              </div>
+              <div class="agent-step">
+                <div class="agent-step-icon" style="background: rgba(251, 191, 36, 0.15);">💲</div>
+                <p><strong>ROI Calculator</strong> — estimates retrofit costs, savings, and payback period</p>
+              </div>
+              <div class="agent-step">
+                <div class="agent-step-icon" style="background: rgba(167, 139, 250, 0.15);">🌐</div>
+                <p><strong>Incentive Finder</strong> — matches property location to available rebates & tax credits</p>
+              </div>
+              <div class="agent-step">
+                <div class="agent-step-icon" style="background: rgba(228, 0, 43, 0.15);">📑</div>
+                <p><strong>Report Generator</strong> — creates client-ready strategy deck with visualizations</p>
+              </div>
+            </div>
+          </div>
+          <div>
+            <h3 style="margin-bottom: 1rem;">Knowledge Base (RAG)</h3>
+            <div class="card" style="padding: 1.5rem;">
+              <div style="display: flex; flex-direction: column; gap: 1rem;">
+                <div>
+                  <span class="pill green" style="font-size: 0.7rem; margin-bottom: 0.5rem;">CERTIFICATIONS</span>
+                  <p style="font-size: 0.82rem; color: var(--text-secondary); margin-top: 0.4rem;">LEED v4.1, WELL v2, ENERGY STAR certification guides</p>
+                </div>
+                <div>
+                  <span class="pill amber" style="font-size: 0.7rem;">REGULATIONS</span>
+                  <p style="font-size: 0.82rem; color: var(--text-secondary); margin-top: 0.4rem;">LL97 (NYC), BERDO (Boston), EU Taxonomy, CSRD compliance</p>
+                </div>
+                <div>
+                  <span class="pill blue" style="font-size: 0.7rem;">INCENTIVES</span>
+                  <p style="font-size: 0.82rem; color: var(--text-secondary); margin-top: 0.4rem;">IRA tax credits, state rebates, utility programs from DSIRE</p>
+                </div>
+                <div>
+                  <span class="pill red" style="font-size: 0.7rem;">TECHNOLOGY</span>
+                  <p style="font-size: 0.82rem; color: var(--text-secondary); margin-top: 0.4rem;">Heat pumps, LED, solar, BMS upgrades — specs, costs & ROI</p>
+                </div>
+              </div>
+            </div>
+            <div style="margin-top: 1rem; padding: 1rem; border-radius: 12px; background: rgba(167, 139, 250, 0.06); border: 1px solid rgba(167, 139, 250, 0.15);">
+              <p style="font-size: 0.82rem; color: var(--accent-purple); font-weight: 500;">
+                🧠 Orchestrated by <strong>LangGraph</strong> — a state-machine agent framework for multi-step reasoning with tool use.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ====== SLIDE 7: TECH STACK ====== -->
+    <div class="slide" data-slide="6">
+      <div class="content-center">
+        <span class="slide-label fade-in">Under the Hood</span>
+        <h2 class="fade-in" style="margin-bottom: 2rem;">Tech Stack</h2>
+        <div class="tech-grid fade-in">
+          <div class="tech-row">
+            <div class="tech-layer" style="color: var(--accent-blue);">Data</div>
+            <div class="tech-items">
+              <span class="tech-tag">Python</span>
+              <span class="tech-tag">httpx / aiohttp</span>
+              <span class="tech-tag">BeautifulSoup</span>
+              <span class="tech-tag highlight">PostGIS</span>
+              <span class="tech-tag">GeoPandas</span>
+            </div>
+          </div>
+          <div class="tech-row">
+            <div class="tech-layer" style="color: #f87171;">ML</div>
+            <div class="tech-items">
+              <span class="tech-tag highlight">XGBoost</span>
+              <span class="tech-tag">scikit-learn</span>
+              <span class="tech-tag highlight">SHAP</span>
+              <span class="tech-tag">LightGBM</span>
+            </div>
+          </div>
+          <div class="tech-row">
+            <div class="tech-layer" style="color: var(--accent-purple);">RAG</div>
+            <div class="tech-items">
+              <span class="tech-tag highlight">ChromaDB</span>
+              <span class="tech-tag">text-embedding-3</span>
+              <span class="tech-tag">LangChain</span>
+            </div>
+          </div>
+          <div class="tech-row">
+            <div class="tech-layer" style="color: var(--accent-green);">Agent</div>
+            <div class="tech-items">
+              <span class="tech-tag highlight">LangGraph</span>
+              <span class="tech-tag">Gemini 2.5 Pro</span>
+              <span class="tech-tag">Tool-use</span>
+            </div>
+          </div>
+          <div class="tech-row">
+            <div class="tech-layer" style="color: var(--accent-amber);">Frontend</div>
+            <div class="tech-items">
+              <span class="tech-tag highlight">Streamlit</span>
+              <span class="tech-tag">Plotly</span>
+              <span class="tech-tag">Folium</span>
+              <span class="tech-tag">WeasyPrint</span>
+            </div>
+          </div>
+          <div class="tech-row">
+            <div class="tech-layer" style="color: var(--text-secondary);">Infra</div>
+            <div class="tech-items">
+              <span class="tech-tag">PostgreSQL</span>
+              <span class="tech-tag">Docker</span>
+              <span class="tech-tag">FastAPI</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ====== SLIDE 8: LIVE DEMO SCENARIO ====== -->
+    <div class="slide" data-slide="7">
+      <div class="content-left">
+        <span class="slide-label fade-in">Demo Scenario</span>
+        <h2 class="fade-in" style="margin-bottom: 0.5rem;">A JLL broker walks into<br><span class="gradient-text">a client meeting</span></h2>
+        <p class="subtitle fade-in" style="margin-bottom: 2rem; font-size: 0.95rem;">
+          The client is a real estate fund with 50 properties across the US Southeast. They want to understand their climate exposure.
+        </p>
+        <div class="two-col stagger">
+          <div>
+            <div class="demo-step">
+              <div class="demo-step-num">1</div>
+              <div class="demo-step-content">
+                <h4>Upload portfolio</h4>
+                <p>Broker uploads a CSV of 50 property addresses. ClimateNexus geocodes each one.</p>
+              </div>
+            </div>
+            <div class="demo-step">
+              <div class="demo-step-num">2</div>
+              <div class="demo-step-content">
+                <h4>Instant risk scoring</h4>
+                <p>In 30 seconds, every property is scored. <strong style="color: #f87171;">12 flagged high flood risk</strong>, <strong style="color: var(--accent-amber);">8 flagged extreme heat</strong>.</p>
+              </div>
+            </div>
+            <div class="demo-step">
+              <div class="demo-step-num">3</div>
+              <div class="demo-step-content">
+                <h4>AI generates strategy</h4>
+                <p>The agent auto-creates tailored recommendations — flood barriers for the 12, cool-roof retrofits for the 8, net-zero roadmap for all 50.</p>
+              </div>
+            </div>
+            <div class="demo-step">
+              <div class="demo-step-num">4</div>
+              <div class="demo-step-content">
+                <h4>Client-ready output</h4>
+                <p>A branded PDF deck with risk heatmap, action plan, <strong style="color: var(--accent-green);">$2.3M in incentives identified</strong>, and 34% projected energy savings.</p>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="card" style="padding: 1.5rem; border-color: rgba(34, 211, 167, 0.15); background: rgba(34, 211, 167, 0.03);">
+              <h3 style="color: var(--accent-green); font-size: 1.1rem; margin-bottom: 1rem;">📑 Output: Strategy Deck</h3>
+              <div style="display: flex; flex-direction: column; gap: 0.8rem;">
+                <div style="display: flex; align-items: center; gap: 0.8rem; padding: 0.6rem; border-radius: 8px; background: rgba(255,255,255,0.03);">
+                  <span>🗺️</span>
+                  <span style="font-size: 0.85rem; color: var(--text-secondary);">Interactive risk heatmap</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 0.8rem; padding: 0.6rem; border-radius: 8px; background: rgba(255,255,255,0.03);">
+                  <span>📊</span>
+                  <span style="font-size: 0.85rem; color: var(--text-secondary);">Per-property score cards with SHAP</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 0.8rem; padding: 0.6rem; border-radius: 8px; background: rgba(255,255,255,0.03);">
+                  <span>✅</span>
+                  <span style="font-size: 0.85rem; color: var(--text-secondary);">Prioritized action plan (quick wins → capex)</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 0.8rem; padding: 0.6rem; border-radius: 8px; background: rgba(255,255,255,0.03);">
+                  <span>💰</span>
+                  <span style="font-size: 0.85rem; color: var(--text-secondary);">Financial model: costs, savings, payback</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 0.8rem; padding: 0.6rem; border-radius: 8px; background: rgba(255,255,255,0.03);">
+                  <span>🏆</span>
+                  <span style="font-size: 0.85rem; color: var(--text-secondary);">Matched incentives & tax credits</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 0.8rem; padding: 0.6rem; border-radius: 8px; background: rgba(255,255,255,0.03);">
+                  <span>📋</span>
+                  <span style="font-size: 0.85rem; color: var(--text-secondary);">Regulatory compliance checklist</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ====== SLIDE 9: BUSINESS IMPACT ====== -->
+    <div class="slide" data-slide="8">
+      <div class="content-center">
+        <span class="slide-label fade-in">Business Impact</span>
+        <h2 class="fade-in" style="margin-bottom: 1rem;">Why this matters<br><span class="gradient-text">for JLL</span></h2>
+        <p class="subtitle fade-in" style="margin-bottom: 2.5rem;">
+          ClimateNexus transforms JLL's advisory from reactive to proactive — and generates real revenue.
+        </p>
+        <div class="impact-row stagger">
+          <div class="impact-card">
+            <div class="impact-num gradient-text-warm">Days → Sec</div>
+            <div class="impact-label">Risk assessment time<br>reduced from days to seconds</div>
+          </div>
+          <div class="impact-card">
+            <div class="impact-num gradient-text">10×</div>
+            <div class="impact-label">More client strategies<br>per sustainability consultant</div>
+          </div>
+          <div class="impact-card">
+            <div class="impact-num" style="color: var(--accent-amber);">$0</div>
+            <div class="impact-label">Data licensing costs<br>100% open data sources</div>
+          </div>
+          <div class="impact-card">
+            <div class="impact-num" style="color: var(--accent-purple);">∞</div>
+            <div class="impact-label">Scalable to any market<br>globally via public APIs</div>
+          </div>
+        </div>
+        <div class="three-col stagger" style="margin-top: 1.5rem;">
+          <div class="card" style="text-align: center; padding: 1.5rem;">
+            <h3 style="font-size: 1rem;">🏢 For Brokers</h3>
+            <p>Walk into client meetings with instant, data-backed climate intelligence</p>
+          </div>
+          <div class="card" style="text-align: center; padding: 1.5rem;">
+            <h3 style="font-size: 1rem;">📈 For Asset Managers</h3>
+            <p>Portfolio-level risk heatmap with prioritized resilience investments</p>
+          </div>
+          <div class="card" style="text-align: center; padding: 1.5rem;">
+            <h3 style="font-size: 1rem;">🤝 For Clients</h3>
+            <p>Personalized sustainability roadmaps with real ROI — not generic advice</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ====== SLIDE 10: JLL ECOSYSTEM FIT ====== -->
+    <div class="slide" data-slide="9">
+      <div class="content-center">
+        <span class="slide-label fade-in">Ecosystem Fit</span>
+        <h2 class="fade-in" style="margin-bottom: 2rem;">Built to plug into<br><span class="gradient-text-warm">JLL's existing platforms</span></h2>
+        <div class="four-col stagger">
+          <div class="card" style="text-align: center; padding: 1.5rem;">
+            <div style="font-size: 2rem; margin-bottom: 0.8rem;">🦅</div>
+            <h3 style="font-size: 1rem;">JLL Falcon</h3>
+            <p>Risk scores feed into Falcon's market intelligence layer as a new signal</p>
+          </div>
+          <div class="card" style="text-align: center; padding: 1.5rem;">
+            <div style="font-size: 2rem; margin-bottom: 0.8rem;">📊</div>
+            <h3 style="font-size: 1rem;">JLL Azara</h3>
+            <p>Portfolio analytics enriched with climate risk as a first-class dimension</p>
+          </div>
+          <div class="card" style="text-align: center; padding: 1.5rem;">
+            <div style="font-size: 2rem; margin-bottom: 0.8rem;">🌿</div>
+            <h3 style="font-size: 1rem;">Carbon Pathfinder</h3>
+            <p>Extend decarbonization roadmaps with risk-aware prioritization</p>
+          </div>
+          <div class="card" style="text-align: center; padding: 1.5rem;">
+            <div style="font-size: 2rem; margin-bottom: 0.8rem;">📋</div>
+            <h3 style="font-size: 1rem;">Risk Advisory</h3>
+            <p>Auto-generate the first draft of Sustainability Risk Advisory reports</p>
+          </div>
+        </div>
+        <div class="quote-block fade-in" style="margin-top: 2rem;">
+          <p>"Climate risk has moved from a sustainability consideration to a core component of real estate underwriting and capital allocation."</p>
+          <cite>— JLL Global Sustainability Report, 2025</cite>
+        </div>
+      </div>
+    </div>
+
+    <!-- ====== SLIDE 11: HACKATHON PLAN ====== -->
+    <div class="slide" data-slide="10">
+      <div class="content-left">
+        <span class="slide-label fade-in">Execution Plan</span>
+        <h2 class="fade-in" style="margin-bottom: 2rem;">48-Hour<br><span class="gradient-text">Build Plan</span></h2>
+        <div class="two-col stagger">
+          <div>
+            <div class="timeline">
+              <div class="timeline-item">
+                <div class="timeline-time">Day 1 AM</div>
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                  <h4>Data Pipeline</h4>
+                  <p>Set up FEMA flood + NOAA heat API ingestion. Geocoding service. PostGIS schema.</p>
+                </div>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-time">Day 1 PM</div>
+                <div class="timeline-dot" style="background: var(--accent-amber);"></div>
+                <div class="timeline-content">
+                  <h4>ML Scoring Engine</h4>
+                  <p>Train XGBoost on Miami/NYC data. Build /score API endpoint. Add SHAP explainability.</p>
+                </div>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-time">Day 1 Eve</div>
+                <div class="timeline-dot" style="background: var(--accent-purple);"></div>
+                <div class="timeline-content">
+                  <h4>RAG Pipeline</h4>
+                  <p>Ingest 20+ sustainability docs into ChromaDB. Test retrieval quality.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="timeline" style="--line-color: var(--accent-green);">
+              <div class="timeline-item">
+                <div class="timeline-time">Day 2 AM</div>
+                <div class="timeline-dot" style="background: var(--accent-blue);"></div>
+                <div class="timeline-content">
+                  <h4>AI Agent</h4>
+                  <p>Build LangGraph agent. Chain risk scores → strategy generation. Wire up all tools.</p>
+                </div>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-time">Day 2 PM</div>
+                <div class="timeline-dot" style="background: var(--accent-green);"></div>
+                <div class="timeline-content">
+                  <h4>Frontend & Demo</h4>
+                  <p>Streamlit UI: map view + score cards + chat + PDF report download.</p>
+                </div>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-time">Day 2 Eve</div>
+                <div class="timeline-dot" style="background: #fff;"></div>
+                <div class="timeline-content">
+                  <h4>Polish & Present</h4>
+                  <p>End-to-end demo run. Generate sample reports. Rehearse pitch.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ====== SLIDE 12: CLOSING / CTA ====== -->
+    <div class="slide" data-slide="11">
+      <div class="content-center title-hero">
+        <div class="fade-in section-badges" style="margin-bottom: 0.5rem;">
+          <span class="pill red">CLIMATE RISK</span>
+          <span class="pill green">SUSTAINABILITY</span>
+          <span class="pill blue">AI / ML</span>
+          <span class="pill amber">RAG + AGENTS</span>
+        </div>
+        <h1 class="fade-in" style="font-size: 4.5rem;">Climate<span class="gradient-text">Nexus</span></h1>
+        <p class="title-tagline fade-in" style="font-size: 1.8rem; font-weight: 400;">Score the risk. Prescribe the cure.</p>
+        <div class="divider fade-in" style="margin: 2rem auto;"></div>
+        <p class="subtitle fade-in" style="font-size: 1.15rem; max-width: 650px;">
+          From fragmented climate data to client-ready sustainability strategies — in seconds, not weeks.
+        </p>
+        <div class="fade-in" style="margin-top: 3rem; display: flex; flex-direction: column; align-items: center; gap: 1rem;">
+          <p style="font-size: 1rem; color: var(--text-muted); font-weight: 500;">JLL 2026 Hackathon · Problem Statements #12 & #13</p>
+          <p style="font-size: 1.3rem; font-weight: 700; color: var(--text-primary);">Thank you. Let's build this. 🚀</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ====== NAVIGATION ====== -->
+  <nav class="nav-bar">
+    <span class="nav-brand">CLIMATENEXUS · JLL 2026</span>
+    <div class="nav-progress" id="navDots"></div>
+    <div class="nav-controls">
+      <button class="nav-btn" id="prevBtn" onclick="changeSlide(-1)">← Prev</button>
+      <span class="nav-counter" id="slideCounter">1 / 12</span>
+      <button class="nav-btn" id="nextBtn" onclick="changeSlide(1)">Next →</button>
+    </div>
+  </nav>
+
+  <script>
+    // ===== SLIDE ENGINE =====
+    const slides = document.querySelectorAll('.slide');
+    const totalSlides = slides.length;
+    let currentSlide = 0;
+    let isAnimating = false;
+
+    // Build nav dots
+    const navDots = document.getElementById('navDots');
+    for (let i = 0; i < totalSlides; i++) {
+      const dot = document.createElement('div');
+      dot.className = 'nav-dot' + (i === 0 ? ' active' : '');
+      dot.addEventListener('click', () => goToSlide(i));
+      navDots.appendChild(dot);
+    }
+
+    function updateUI() {
+      // Update dots
+      document.querySelectorAll('.nav-dot').forEach((dot, i) => {
+        dot.classList.toggle('active', i === currentSlide);
+      });
+
+      // Update counter
+      document.getElementById('slideCounter').textContent =
+        `${currentSlide + 1} / ${totalSlides}`;
+
+      // Update buttons
+      document.getElementById('prevBtn').style.opacity = currentSlide === 0 ? '0.3' : '1';
+      document.getElementById('nextBtn').style.opacity = currentSlide === totalSlides - 1 ? '0.3' : '1';
+    }
+
+    function goToSlide(index) {
+      if (index === currentSlide || isAnimating || index < 0 || index >= totalSlides) return;
+
+      isAnimating = true;
+      const direction = index > currentSlide ? 1 : -1;
+
+      // Exit current slide
+      slides[currentSlide].classList.remove('active');
+      if (direction > 0) {
+        slides[currentSlide].classList.add('exit-up');
+      }
+
+      // Clean up after transition
+      setTimeout(() => {
+        slides[currentSlide].classList.remove('exit-up');
+        currentSlide = index;
+
+        // Enter new slide
+        slides[currentSlide].classList.add('active');
+        updateUI();
+
+        setTimeout(() => { isAnimating = false; }, 100);
+      }, 150);
+    }
+
+    function changeSlide(delta) {
+      goToSlide(currentSlide + delta);
+    }
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') {
+        e.preventDefault();
+        changeSlide(1);
+      } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+        e.preventDefault();
+        changeSlide(-1);
+      } else if (e.key === 'Home') {
+        e.preventDefault();
+        goToSlide(0);
+      } else if (e.key === 'End') {
+        e.preventDefault();
+        goToSlide(totalSlides - 1);
+      }
+    });
+
+    // Touch support
+    let touchStartX = 0;
+    let touchStartY = 0;
+
+    document.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+      touchStartY = e.changedTouches[0].screenY;
+    });
+
+    document.addEventListener('touchend', (e) => {
+      const dx = e.changedTouches[0].screenX - touchStartX;
+      const dy = e.changedTouches[0].screenY - touchStartY;
+      if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 50) {
+        changeSlide(dx < 0 ? 1 : -1);
+      }
+    });
+
+    // Initialize
+    updateUI();
+  </script>
+</body>
+</html>

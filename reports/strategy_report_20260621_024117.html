@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ClimateNexus Portfolio Strategy</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            color: #1a1a2e;
+            line-height: 1.6;
+            font-size: 11pt;
+        }
+        .page { page-break-after: always; padding: 40px; }
+        .page:last-child { page-break-after: avoid; }
+
+        /* Cover */
+        .cover {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 90vh;
+            text-align: center;
+            background: linear-gradient(135deg, #0a1628 0%, #1a3a5c 50%, #2d6a4f 100%);
+            color: white;
+            padding: 60px;
+        }
+        .cover h1 { font-size: 36pt; font-weight: 700; margin-bottom: 16px; }
+        .cover h2 { font-size: 16pt; font-weight: 300; opacity: 0.9; margin-bottom: 40px; }
+        .cover .meta { font-size: 10pt; opacity: 0.7; }
+
+        /* Section headers */
+        h2 { color: #1a3a5c; font-size: 18pt; border-bottom: 3px solid #2d6a4f; padding-bottom: 8px; margin: 30px 0 20px; }
+        h3 { color: #2d6a4f; font-size: 13pt; margin: 20px 0 10px; }
+
+        /* Tables */
+        table { width: 100%; border-collapse: collapse; margin: 15px 0; font-size: 10pt; }
+        th { background: #1a3a5c; color: white; padding: 10px 12px; text-align: left; font-weight: 600; }
+        td { padding: 8px 12px; border-bottom: 1px solid #e0e0e0; }
+        tr:nth-child(even) td { background: #f8f9fa; }
+
+        /* Risk badge */
+        .risk-high { color: #d32f2f; font-weight: 600; }
+        .risk-medium { color: #f57c00; font-weight: 600; }
+        .risk-low { color: #388e3c; font-weight: 600; }
+
+        /* Priority badges */
+        .priority-quick { background: #e8f5e9; color: #2e7d32; padding: 2px 8px; border-radius: 12px; font-size: 9pt; }
+        .priority-medium { background: #fff3e0; color: #e65100; padding: 2px 8px; border-radius: 12px; font-size: 9pt; }
+        .priority-capex { background: #fce4ec; color: #c62828; padding: 2px 8px; border-radius: 12px; font-size: 9pt; }
+
+        /* Key metrics */
+        .metrics { display: flex; gap: 20px; margin: 20px 0; }
+        .metric-card {
+            flex: 1; background: #f0f7f4; border-left: 4px solid #2d6a4f;
+            padding: 15px; border-radius: 4px;
+        }
+        .metric-card .value { font-size: 24pt; font-weight: 700; color: #1a3a5c; }
+        .metric-card .label { font-size: 9pt; color: #666; text-transform: uppercase; letter-spacing: 0.5px; }
+
+        /* Narrative */
+        .narrative { background: #fafafa; padding: 20px; border-radius: 8px; margin: 15px 0; border: 1px solid #e0e0e0; }
+        .narrative p { margin-bottom: 12px; }
+
+        /* Footer */
+        .footer { text-align: center; font-size: 8pt; color: #999; margin-top: 40px; padding-top: 20px; border-top: 1px solid #e0e0e0; }
+    </style>
+</head>
+<body>
+
+<!-- Cover Page -->
+<div class="page cover">
+    <h1>ClimateNexus Portfolio Strategy</h1>
+    <h2>Multi-Hazard Climate Risk Assessment & Sustainability Strategy</h2>
+    <div class="meta">
+        <p>Prepared by ClimateNexus AI</p>
+        <p>June 21, 2026</p>
+        <p>2 Properties Analyzed</p>
+    </div>
+</div>
+
+<!-- Executive Summary -->
+<div class="page">
+    <h2>1. Executive Summary</h2>
+
+    <div class="metrics">
+        <div class="metric-card">
+            <div class="value">49.5</div>
+            <div class="label">Avg Risk Score</div>
+        </div>
+        <div class="metric-card">
+            <div class="value">$148,500</div>
+            <div class="label">Total Annual Risk Exposure</div>
+        </div>
+        <div class="metric-card">
+            <div class="value">$5,917,500</div>
+            <div class="label">Available Incentives</div>
+        </div>
+        <div class="metric-card">
+            <div class="value">$325,000</div>
+            <div class="label">Est. Annual Savings</div>
+        </div>
+    </div>
+
+    <div class="narrative">
+        <p>Analysis of 2 properties identified 2 medium-risk assets.</p>
+    </div>
+
+    <h3>Portfolio Risk Distribution</h3>
+    <table>
+        <tr>
+            <th>Risk Level</th>
+            <th>Properties</th>
+            <th>Percentage</th>
+        </tr>
+        <tr>
+            <td><span class="risk-high">High Risk (≥70)</span></td>
+            <td>0</td>
+            <td>0%</td>
+        </tr>
+        <tr>
+            <td><span class="risk-medium">Medium Risk (40–69)</span></td>
+            <td>2</td>
+            <td>100%</td>
+        </tr>
+        <tr>
+            <td><span class="risk-low">Low Risk (&lt;40)</span></td>
+            <td>0</td>
+            <td>0%</td>
+        </tr>
+    </table>
+</div>
+
+<!-- Recommended Actions -->
+<div class="page">
+    <h2>2. Recommended Actions</h2>
+
+    
+    <h3>1. LED Lighting Retrofit</h3>
+    <table>
+        <tr><td style="width:200px"><strong>Category</strong></td><td>energy_efficiency</td></tr>
+        <tr><td><strong>Priority</strong></td><td>
+            <span class="priority-quick">Quick Win</span>
+            
+        </td></tr>
+        <tr><td><strong>Affected Properties</strong></td><td>55 Water Street</td></tr>
+        <tr><td><strong>Estimated Cost</strong></td><td>$75,000</td></tr>
+        <tr><td><strong>Annual Savings</strong></td><td>$25,000</td></tr>
+        <tr><td><strong>Payback Period</strong></td><td>3.0 years</td></tr>
+        <tr><td><strong>Applicable Incentives</strong></td><td>IRA 179D</td></tr>
+        <tr><td><strong>Rationale</strong></td><td>Quick win measure.</td></tr>
+    </table>
+    
+    <h3>2. Flood Barriers</h3>
+    <table>
+        <tr><td style="width:200px"><strong>Category</strong></td><td>flood_mitigation</td></tr>
+        <tr><td><strong>Priority</strong></td><td>
+            <span class="priority-capex">Capital Investment</span>
+        </td></tr>
+        <tr><td><strong>Affected Properties</strong></td><td>830 Brickell Plaza, 55 Water Street</td></tr>
+        <tr><td><strong>Estimated Cost</strong></td><td>$375,000</td></tr>
+        <tr><td><strong>Annual Savings</strong></td><td>$0</td></tr>
+        
+        <tr><td><strong>Applicable Incentives</strong></td><td>FEMA HMGP</td></tr>
+        <tr><td><strong>Rationale</strong></td><td>Critical flood protection.</td></tr>
+    </table>
+    
+</div>
+
+<!-- Financial Summary -->
+<div class="page">
+    <h2>3. Financial Summary</h2>
+
+    <h3>Investment Overview</h3>
+    <table>
+        <tr><th>Measure</th><th>Cost</th><th>Annual Savings</th><th>Payback</th></tr>
+        
+        <tr>
+            <td>LED Lighting Retrofit</td>
+            <td>$75,000</td>
+            <td>$25,000</td>
+            <td>3.0 yrs</td>
+        </tr>
+        
+        <tr>
+            <td>Flood Barriers</td>
+            <td>$375,000</td>
+            <td>$0</td>
+            <td>N/A (risk avoidance)</td>
+        </tr>
+        
+        <tr style="font-weight:700; background:#f0f7f4;">
+            <td>TOTAL</td>
+            <td>$450,000</td>
+            <td>$25,000</td>
+            <td>—</td>
+        </tr>
+    </table>
+
+    <h3>Available Incentives &amp; Tax Credits</h3>
+    <div class="narrative">
+        <p>Total estimated incentive value: <strong>$5,917,500</strong></p>
+        <p>Net investment after incentives: <strong>$-5,467,500</strong></p>
+    </div>
+
+    <div class="footer">
+        <p>Generated by ClimateNexus AI — June 21, 2026</p>
+        <p>This report is for informational purposes. Financial projections are estimates based on industry benchmarks.</p>
+    </div>
+</div>
+
+</body>
+</html>

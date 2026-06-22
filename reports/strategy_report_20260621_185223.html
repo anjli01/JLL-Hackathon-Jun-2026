@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ClimateNexus Sustainability Strategy</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            color: #1a1a2e;
+            line-height: 1.6;
+            font-size: 11pt;
+        }
+        .page { page-break-after: always; padding: 40px; }
+        .page:last-child { page-break-after: avoid; }
+
+        /* Cover */
+        .cover {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 90vh;
+            text-align: center;
+            background: linear-gradient(135deg, #0a1628 0%, #1a3a5c 50%, #2d6a4f 100%);
+            color: white;
+            padding: 60px;
+        }
+        .cover h1 { font-size: 36pt; font-weight: 700; margin-bottom: 16px; }
+        .cover h2 { font-size: 16pt; font-weight: 300; opacity: 0.9; margin-bottom: 40px; }
+        .cover .meta { font-size: 10pt; opacity: 0.7; }
+
+        /* Section headers */
+        h2 { color: #1a3a5c; font-size: 18pt; border-bottom: 3px solid #2d6a4f; padding-bottom: 8px; margin: 30px 0 20px; }
+        h3 { color: #2d6a4f; font-size: 13pt; margin: 20px 0 10px; }
+
+        /* Tables */
+        table { width: 100%; border-collapse: collapse; margin: 15px 0; font-size: 10pt; }
+        th { background: #1a3a5c; color: white; padding: 10px 12px; text-align: left; font-weight: 600; }
+        td { padding: 8px 12px; border-bottom: 1px solid #e0e0e0; }
+        tr:nth-child(even) td { background: #f8f9fa; }
+
+        /* Risk badge */
+        .risk-high { color: #d32f2f; font-weight: 600; }
+        .risk-medium { color: #f57c00; font-weight: 600; }
+        .risk-low { color: #388e3c; font-weight: 600; }
+
+        /* Priority badges */
+        .priority-quick { background: #e8f5e9; color: #2e7d32; padding: 2px 8px; border-radius: 12px; font-size: 9pt; }
+        .priority-medium { background: #fff3e0; color: #e65100; padding: 2px 8px; border-radius: 12px; font-size: 9pt; }
+        .priority-capex { background: #fce4ec; color: #c62828; padding: 2px 8px; border-radius: 12px; font-size: 9pt; }
+
+        /* Key metrics */
+        .metrics { display: flex; gap: 20px; margin: 20px 0; }
+        .metric-card {
+            flex: 1; background: #f0f7f4; border-left: 4px solid #2d6a4f;
+            padding: 15px; border-radius: 4px;
+        }
+        .metric-card .value { font-size: 24pt; font-weight: 700; color: #1a3a5c; }
+        .metric-card .label { font-size: 9pt; color: #666; text-transform: uppercase; letter-spacing: 0.5px; }
+
+        /* Narrative */
+        .narrative { background: #fafafa; padding: 20px; border-radius: 8px; margin: 15px 0; border: 1px solid #e0e0e0; }
+        .narrative p { margin-bottom: 12px; }
+
+        /* Footer */
+        .footer { text-align: center; font-size: 8pt; color: #999; margin-top: 40px; padding-top: 20px; border-top: 1px solid #e0e0e0; }
+    </style>
+</head>
+<body>
+
+<!-- Cover Page -->
+<div class="page cover">
+    <h1>ClimateNexus Sustainability Strategy</h1>
+    <h2>Multi-Hazard Climate Risk Assessment & Sustainability Strategy</h2>
+    <div class="meta">
+        <p>Prepared by ClimateNexus AI</p>
+        <p>June 21, 2026</p>
+        <p>1 Properties Analyzed</p>
+    </div>
+</div>
+
+<!-- Executive Summary -->
+<div class="page">
+    <h2>1. Executive Summary</h2>
+
+    <div class="metrics">
+        <div class="metric-card">
+            <div class="value">74.0</div>
+            <div class="label">Avg Risk Score</div>
+        </div>
+        <div class="metric-card">
+            <div class="value">$111,000</div>
+            <div class="label">Total Annual Risk Exposure</div>
+        </div>
+        <div class="metric-card">
+            <div class="value">$137,317,000</div>
+            <div class="label">Available Incentives</div>
+        </div>
+        <div class="metric-card">
+            <div class="value">$7,930,000</div>
+            <div class="label">Est. Annual Savings</div>
+        </div>
+    </div>
+
+    <div class="narrative">
+        **Executive Summary: Portfolio Sustainability Strategy Report**
+
+The current portfolio risk assessment highlights significant exposures, particularly for the property at **415 Mission Street, San Francisco, CA 94105**, which registers a high overall risk score of 74.0. Dominant physical hazards requiring immediate attention include high seismic risk (85.0) and flood risk (80.0). Furthermore, the property exhibits a substantial transition risk (75.0), indicating its vulnerability to evolving market dynamics, investor demands, and tightening environmental regulations. Proactive measures are critical to mitigate these risks and enhance long-term asset resilience and value.
+
+To strategically address these identified risks, a prioritized action plan is recommended. "Quick win" initiatives such as **Building Management System Upgrades ($3.66M cost)** and **LED Lighting Retrofits ($1.83M cost)** are projected to deliver rapid operational savings with attractive 3-year paybacks. Medium-term investments in **Rooftop Solar PV ($12.2M cost)** and **Air-Source Heat Pumps ($24.4M cost)** offer significant decarbonization potential with paybacks of 5.0 and 6.7 years, respectively. Concurrently, critical capital expenditures like **Flood Barriers & Shields ($9.15M)** and **Elevated Mechanical Systems ($14.03M)** are essential for bolstering physical resilience against high flood hazards and protecting vital infrastructure.
+
+The implementation of these strategies presents a compelling financial opportunity. The recommended energy efficiency and decarbonization measures are projected to generate substantial **annual operational savings totaling $7,930,000**. A significant advantage is the availability of **over $137,317,000 in incentives** across 7 matched programs, which can dramatically offset initial capital investment and enhance project viability. These incentives, coupled with attractive paybacks for energy-saving measures, underpin a strong return on investment.
+
+These strategic actions establish a clear and proactive pathway for regulatory compliance and long-term asset value protection. While the property at 415 Mission Street is currently governed by **Title 24 (California Building Standards)**, its high transition risk score (75.0) strongly signals future exposure to tightening emissions standards and evolving market expectations. By investing in these decarbonization and resilience measures, the portfolio will be well-positioned to meet anticipated regulatory pressures, mitigate the risk of stranded assets and "brown discounts," and align with the growing demand for ESG performance from institutional investors.
+    </div>
+
+    <h3>Portfolio Risk Distribution</h3>
+    <table>
+        <tr>
+            <th>Risk Level</th>
+            <th>Properties</th>
+            <th>Percentage</th>
+        </tr>
+        <tr>
+            <td><span class="risk-high">High Risk (≥70)</span></td>
+            <td>1</td>
+            <td>100%</td>
+        </tr>
+        <tr>
+            <td><span class="risk-medium">Medium Risk (40–69)</span></td>
+            <td>0</td>
+            <td>0%</td>
+        </tr>
+        <tr>
+            <td><span class="risk-low">Low Risk (&lt;40)</span></td>
+            <td>0</td>
+            <td>0%</td>
+        </tr>
+    </table>
+</div>
+
+<!-- Recommended Actions -->
+<div class="page">
+    <h2>2. Recommended Actions</h2>
+
+    
+    <h3>1. Building Management System Upgrade</h3>
+    <table>
+        <tr><td style="width:200px"><strong>Category</strong></td><td>energy_efficiency</td></tr>
+        <tr><td><strong>Priority</strong></td><td>
+            <span class="priority-quick">Quick Win</span>
+            
+        </td></tr>
+        <tr><td><strong>Affected Properties</strong></td><td>415 Mission Street, San Francisco, CA 94105</td></tr>
+        <tr><td><strong>Estimated Cost</strong></td><td>$3,660,000</td></tr>
+        <tr><td><strong>Annual Savings</strong></td><td>$1,220,000</td></tr>
+        <tr><td><strong>Payback Period</strong></td><td>3.0 years</td></tr>
+        <tr><td><strong>Applicable Incentives</strong></td><td>IRA Section 179D — Commercial Building Energy Efficiency Deduction; C-PACE Financing</td></tr>
+        <tr><td><strong>Rationale</strong></td><td>Smart controls for HVAC scheduling, fault detection, and demand response.</td></tr>
+    </table>
+    
+    <h3>2. LED Lighting Retrofit</h3>
+    <table>
+        <tr><td style="width:200px"><strong>Category</strong></td><td>energy_efficiency</td></tr>
+        <tr><td><strong>Priority</strong></td><td>
+            <span class="priority-quick">Quick Win</span>
+            
+        </td></tr>
+        <tr><td><strong>Affected Properties</strong></td><td>415 Mission Street, San Francisco, CA 94105</td></tr>
+        <tr><td><strong>Estimated Cost</strong></td><td>$1,830,000</td></tr>
+        <tr><td><strong>Annual Savings</strong></td><td>$610,000</td></tr>
+        <tr><td><strong>Payback Period</strong></td><td>3.0 years</td></tr>
+        <tr><td><strong>Applicable Incentives</strong></td><td>IRA Section 179D — Commercial Building Energy Efficiency Deduction; C-PACE Financing</td></tr>
+        <tr><td><strong>Rationale</strong></td><td>Replace fluorescent/HID lighting with LED fixtures and controls.</td></tr>
+    </table>
+    
+    <h3>3. Rooftop Solar PV</h3>
+    <table>
+        <tr><td style="width:200px"><strong>Category</strong></td><td>renewable_energy</td></tr>
+        <tr><td><strong>Priority</strong></td><td>
+            <span class="priority-medium">Medium Term</span>
+            
+        </td></tr>
+        <tr><td><strong>Affected Properties</strong></td><td>415 Mission Street, San Francisco, CA 94105</td></tr>
+        <tr><td><strong>Estimated Cost</strong></td><td>$12,200,000</td></tr>
+        <tr><td><strong>Annual Savings</strong></td><td>$2,440,000</td></tr>
+        <tr><td><strong>Payback Period</strong></td><td>5.0 years</td></tr>
+        <tr><td><strong>Applicable Incentives</strong></td><td>IRA Section 48 — Investment Tax Credit (Solar PV); C-PACE Financing; California SGIP — Self-Generation Incentive Program</td></tr>
+        <tr><td><strong>Rationale</strong></td><td>On-site solar photovoltaic system to offset grid electricity.</td></tr>
+    </table>
+    
+    <h3>4. Air-Source Heat Pump (ASHP)</h3>
+    <table>
+        <tr><td style="width:200px"><strong>Category</strong></td><td>electrification</td></tr>
+        <tr><td><strong>Priority</strong></td><td>
+            <span class="priority-medium">Medium Term</span>
+            
+        </td></tr>
+        <tr><td><strong>Affected Properties</strong></td><td>415 Mission Street, San Francisco, CA 94105</td></tr>
+        <tr><td><strong>Estimated Cost</strong></td><td>$24,400,000</td></tr>
+        <tr><td><strong>Annual Savings</strong></td><td>$3,660,000</td></tr>
+        <tr><td><strong>Payback Period</strong></td><td>6.7 years</td></tr>
+        <tr><td><strong>Applicable Incentives</strong></td><td>IRA Section 179D — Commercial Building Energy Efficiency Deduction; IRA Section 48 — Investment Tax Credit (Geothermal); C-PACE Financing</td></tr>
+        <tr><td><strong>Rationale</strong></td><td>Electrify heating/cooling with high-efficiency air-source heat pumps.</td></tr>
+    </table>
+    
+    <h3>5. Flood Barriers & Shields</h3>
+    <table>
+        <tr><td style="width:200px"><strong>Category</strong></td><td>flood_mitigation</td></tr>
+        <tr><td><strong>Priority</strong></td><td>
+            <span class="priority-capex">Capital Investment</span>
+        </td></tr>
+        <tr><td><strong>Affected Properties</strong></td><td>415 Mission Street, San Francisco, CA 94105</td></tr>
+        <tr><td><strong>Estimated Cost</strong></td><td>$9,150,000</td></tr>
+        <tr><td><strong>Annual Savings</strong></td><td>$0</td></tr>
+        
+        <tr><td><strong>Applicable Incentives</strong></td><td>C-PACE Financing; FEMA Hazard Mitigation Grant Program (HMGP); FEMA BRIC — Pre-Disaster Mitigation Grant</td></tr>
+        <tr><td><strong>Rationale</strong></td><td>Deployable flood barriers for doorways, loading docks, and below-grade entries.</td></tr>
+    </table>
+    
+    <h3>6. Elevated Mechanical Systems</h3>
+    <table>
+        <tr><td style="width:200px"><strong>Category</strong></td><td>flood_mitigation</td></tr>
+        <tr><td><strong>Priority</strong></td><td>
+            <span class="priority-capex">Capital Investment</span>
+        </td></tr>
+        <tr><td><strong>Affected Properties</strong></td><td>415 Mission Street, San Francisco, CA 94105</td></tr>
+        <tr><td><strong>Estimated Cost</strong></td><td>$14,030,000</td></tr>
+        <tr><td><strong>Annual Savings</strong></td><td>$0</td></tr>
+        
+        <tr><td><strong>Applicable Incentives</strong></td><td>C-PACE Financing; FEMA Hazard Mitigation Grant Program (HMGP); FEMA BRIC — Pre-Disaster Mitigation Grant</td></tr>
+        <tr><td><strong>Rationale</strong></td><td>Relocate HVAC, electrical, and generators above Base Flood Elevation.</td></tr>
+    </table>
+    
+</div>
+
+<!-- Financial Summary -->
+<div class="page">
+    <h2>3. Financial Summary</h2>
+
+    <h3>Investment Overview</h3>
+    <table>
+        <tr><th>Measure</th><th>Cost</th><th>Annual Savings</th><th>Payback</th></tr>
+        
+        <tr>
+            <td>Building Management System Upgrade</td>
+            <td>$3,660,000</td>
+            <td>$1,220,000</td>
+            <td>3.0 yrs</td>
+        </tr>
+        
+        <tr>
+            <td>LED Lighting Retrofit</td>
+            <td>$1,830,000</td>
+            <td>$610,000</td>
+            <td>3.0 yrs</td>
+        </tr>
+        
+        <tr>
+            <td>Rooftop Solar PV</td>
+            <td>$12,200,000</td>
+            <td>$2,440,000</td>
+            <td>5.0 yrs</td>
+        </tr>
+        
+        <tr>
+            <td>Air-Source Heat Pump (ASHP)</td>
+            <td>$24,400,000</td>
+            <td>$3,660,000</td>
+            <td>6.7 yrs</td>
+        </tr>
+        
+        <tr>
+            <td>Flood Barriers & Shields</td>
+            <td>$9,150,000</td>
+            <td>$0</td>
+            <td>N/A (risk avoidance)</td>
+        </tr>
+        
+        <tr>
+            <td>Elevated Mechanical Systems</td>
+            <td>$14,030,000</td>
+            <td>$0</td>
+            <td>N/A (risk avoidance)</td>
+        </tr>
+        
+        <tr style="font-weight:700; background:#f0f7f4;">
+            <td>TOTAL</td>
+            <td>$65,270,000</td>
+            <td>$7,930,000</td>
+            <td>—</td>
+        </tr>
+    </table>
+
+    <h3>Available Incentives &amp; Tax Credits</h3>
+    <div class="narrative">
+        <p>Total estimated incentive value: <strong>$137,317,000</strong></p>
+        <p>Net investment after incentives: <strong>$-72,047,000</strong></p>
+    </div>
+</div>
+
+<!-- Risk Heatmap -->
+<div class="page">
+    <h2>4. Risk Heatmap</h2>
+
+    <h3>Properties by Hazard Category</h3>
+    <table>
+        <tr>
+            <th>Property</th>
+            <th>Composite Score</th>
+            <th>Flood</th>
+            <th>Heat</th>
+            <th>Wildfire</th>
+            <th>Transition</th>
+            <th>Seismic</th>
+        </tr>
+        
+        <tr>
+            <td>415 Mission Street, San Francisco, CA 94105</td>
+            <td>
+                <span class="risk-high">74.0</span>
+                
+            </td>
+            
+            <td>
+                
+                <span class="risk-high">80.0</span>
+                
+            </td>
+            
+            <td>
+                
+                <span class="risk-low">22.0</span>
+            </td>
+            
+            <td>
+                
+                <span class="risk-low">5.0</span>
+            </td>
+            
+            <td>
+                
+                <span class="risk-high">75.0</span>
+                
+            </td>
+            
+            <td>
+                
+                <span class="risk-high">85.0</span>
+                
+            </td>
+            
+        </tr>
+        
+    </table>
+
+    <h3>Legend</h3>
+    <table>
+        <tr>
+            <td><span class="risk-high">&#9632;</span> High Risk (&ge;70)</td>
+            <td><span class="risk-medium">&#9632;</span> Medium Risk (40&ndash;69)</td>
+            <td><span class="risk-low">&#9632;</span> Low Risk (&lt;40)</td>
+        </tr>
+    </table>
+</div>
+
+<!-- Regulatory Compliance Roadmap -->
+<div class="page">
+    <h2>5. Regulatory Compliance Roadmap</h2>
+
+    
+    
+    <h3>Title 24 (California Building Standards)</h3>
+    <table>
+        <tr><td style="width:200px"><strong>Jurisdiction</strong></td><td>Unknown</td></tr>
+        <tr><td><strong>Affected Properties</strong></td><td>415 Mission Street, San Francisco, CA 94105</td></tr>
+        <tr><td><strong>Key Requirement</strong></td><td>Building performance standard</td></tr>
+        <tr><td><strong>Deadline</strong></td><td>Check local requirements</td></tr>
+        <tr><td><strong>Penalty</strong></td><td>Varies</td></tr>
+        <tr><td><strong>Recommended Pathway</strong></td><td>Energy efficiency improvements</td></tr>
+    </table>
+    
+    <h3>Title 24 (California Building Code)</h3>
+    <table>
+        <tr><td style="width:200px"><strong>Jurisdiction</strong></td><td>California</td></tr>
+        <tr><td><strong>Affected Properties</strong></td><td>415 Mission Street, San Francisco, CA 94105</td></tr>
+        <tr><td><strong>Key Requirement</strong></td><td>All-electric new construction mandate. Existing buildings must meet energy efficiency standards during major renovations.</td></tr>
+        <tr><td><strong>Deadline</strong></td><td>2023 (new construction), 2026 (major renovations)</td></tr>
+        <tr><td><strong>Penalty</strong></td><td>Permit denial, stop-work orders</td></tr>
+        <tr><td><strong>Recommended Pathway</strong></td><td>Heat pump HVAC, induction cooking, solar PV + battery storage</td></tr>
+    </table>
+    
+    
+</div>
+
+<!-- Appendix -->
+<div class="page">
+    <h2>6. Appendix</h2>
+
+    <h3>A. Methodology</h3>
+    <div class="narrative">
+        <p><strong>Risk Scoring:</strong> Multi-hazard composite risk scores (0&ndash;100) are calculated using a weighted ensemble model combining data from FEMA National Flood Hazard Layer, NOAA climate normals, USFS Wildfire Risk to Communities, USGS earthquake hazard data, and OpenStreetMap building metadata.</p>
+        <p><strong>Financial Estimates:</strong> Retrofit costs and savings are based on industry benchmarks adjusted for building type, climate zone, and size. Payback periods use simple payback (cost / annual savings). NPV calculations use a 5% discount rate over a 10-year horizon.</p>
+        <p><strong>Incentive Matching:</strong> Incentives are matched by property location (state/city) and planned measure type against a curated database of federal (IRA), state, and local programs. Estimated values are approximations; actual amounts depend on project details and application outcomes.</p>
+        <p><strong>Strategy Generation:</strong> Recommendations are synthesized by an AI agent (LangGraph + Gemini) using retrieval-augmented generation over a curated knowledge base of sustainability regulations, technology specifications, and financial incentive programs.</p>
+    </div>
+
+    <h3>B. Data Sources</h3>
+    <table>
+        <tr><th>Source</th><th>Data Used</th></tr>
+        <tr><td>FEMA NFHL</td><td>Flood zone designations, NRI loss values</td></tr>
+        <tr><td>NOAA Climate Normals</td><td>Temperature and precipitation data for heat risk</td></tr>
+        <tr><td>USFS</td><td>Wildfire risk ratings by geographic area</td></tr>
+        <tr><td>USGS</td><td>Peak ground acceleration (seismic hazard)</td></tr>
+        <tr><td>OpenStreetMap</td><td>Building type, levels, land use classification</td></tr>
+        <tr><td>EPA ENERGY STAR</td><td>Building energy performance benchmarks</td></tr>
+        <tr><td>IRA / DSIRE</td><td>Federal and state incentive programs</td></tr>
+    </table>
+
+    <h3>C. Disclaimer</h3>
+    <div class="narrative">
+        <p>This report is generated by ClimateNexus AI for informational and planning purposes only. All financial projections, risk scores, and incentive estimates are approximations based on publicly available data and industry benchmarks. They should not be construed as financial advice. Consult qualified professionals for engineering assessments, legal compliance review, and investment decisions.</p>
+    </div>
+
+    <div class="footer">
+        <p>Generated by ClimateNexus AI &mdash; June 21, 2026</p>
+        <p>Confidential &mdash; Prepared for internal use</p>
+    </div>
+</div>
+
+</body>
+</html>

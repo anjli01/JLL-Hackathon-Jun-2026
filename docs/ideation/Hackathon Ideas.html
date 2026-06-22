@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ClimateNexus — JLL 2026 Hackathon</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    /* ===== RESET ===== */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    /* ===== PAGE / PRINT SETUP ===== */
+    @page {
+      size: A4;
+      margin: 18mm 20mm 20mm 20mm;
+    }
+
+    @media print {
+      body { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+      .page-break { page-break-before: always; }
+      .no-break { page-break-inside: avoid; }
+    }
+
+    /* ===== BASE ===== */
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: 10pt;
+      line-height: 1.55;
+      color: #1e293b;
+      background: #fff;
+      max-width: 210mm;
+      margin: 0 auto;
+      padding: 20mm;
+    }
+
+    /* ===== COVER ===== */
+    .cover {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      min-height: 200mm;
+      padding-bottom: 30mm;
+    }
+
+    .cover-badges {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+
+    .cover-badge {
+      display: inline-block;
+      padding: 5px 14px;
+      border-radius: 6px;
+      font-size: 8pt;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    .badge-red { background: #fee2e2; color: #dc2626; }
+    .badge-green { background: #d1fae5; color: #059669; }
+
+    .cover h1 {
+      font-size: 42pt;
+      font-weight: 900;
+      letter-spacing: -2px;
+      line-height: 1.05;
+      color: #0f172a;
+      margin-bottom: 8px;
+    }
+
+    .cover h1 span {
+      background: linear-gradient(135deg, #059669, #0ea5e9);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .cover-tagline {
+      font-size: 18pt;
+      font-weight: 300;
+      color: #64748b;
+      margin-bottom: 20px;
+      letter-spacing: -0.5px;
+    }
+
+    .cover-description {
+      font-size: 11pt;
+      color: #475569;
+      max-width: 500px;
+      line-height: 1.6;
+      margin-bottom: 30px;
+    }
+
+    .cover-meta {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      padding-top: 20px;
+      border-top: 2px solid #e2e8f0;
+    }
+
+    .cover-meta-item {
+      font-size: 9pt;
+      color: #64748b;
+      font-weight: 500;
+    }
+
+    .cover-meta-item strong {
+      color: #0f172a;
+    }
+
+    .cover-line {
+      width: 50px;
+      height: 3px;
+      background: linear-gradient(90deg, #dc2626, #f97316);
+      border-radius: 2px;
+      margin-bottom: 20px;
+    }
+
+    /* ===== TYPOGRAPHY ===== */
+    h2 {
+      font-size: 18pt;
+      font-weight: 800;
+      color: #0f172a;
+      margin-top: 28px;
+      margin-bottom: 10px;
+      letter-spacing: -0.8px;
+      padding-bottom: 6px;
+      border-bottom: 2px solid #e2e8f0;
+    }
+
+    h2 .accent { color: #059669; }
+    h2 .accent-warm { color: #dc2626; }
+
+    h3 {
+      font-size: 12pt;
+      font-weight: 700;
+      color: #1e293b;
+      margin-top: 18px;
+      margin-bottom: 8px;
+    }
+
+    h4 {
+      font-size: 10pt;
+      font-weight: 700;
+      color: #334155;
+      margin-top: 12px;
+      margin-bottom: 4px;
+    }
+
+    p {
+      margin-bottom: 8px;
+      color: #475569;
+    }
+
+    strong { color: #1e293b; }
+
+    /* ===== TABLES ===== */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 12px 0;
+      font-size: 9pt;
+    }
+
+    thead th {
+      background: #f1f5f9;
+      color: #334155;
+      font-weight: 700;
+      text-align: left;
+      padding: 8px 12px;
+      border-bottom: 2px solid #cbd5e1;
+      font-size: 8.5pt;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+
+    tbody td {
+      padding: 7px 12px;
+      border-bottom: 1px solid #e2e8f0;
+      color: #475569;
+      vertical-align: top;
+    }
+
+    tbody tr:last-child td { border-bottom: none; }
+
+    tbody tr:nth-child(even) { background: #f8fafc; }
+
+    /* Emoji column alignment */
+    td:first-child { font-weight: 500; color: #1e293b; }
+
+    /* ===== BLOCKQUOTE / CALLOUT ===== */
+    blockquote {
+      margin: 14px 0;
+      padding: 14px 18px;
+      border-left: 3px solid #dc2626;
+      background: #fef2f2;
+      border-radius: 0 8px 8px 0;
+      font-size: 9.5pt;
+    }
+
+    blockquote p { color: #991b1b; margin-bottom: 0; }
+    blockquote strong { color: #7f1d1d; }
+
+    .callout-green {
+      border-left-color: #059669;
+      background: #ecfdf5;
+    }
+
+    .callout-green p { color: #065f46; }
+    .callout-green strong { color: #064e3b; }
+
+    .callout-blue {
+      border-left-color: #0ea5e9;
+      background: #f0f9ff;
+    }
+
+    .callout-blue p { color: #0c4a6e; }
+
+    /* ===== CODE BLOCKS / DIAGRAMS ===== */
+    .diagram {
+      background: #0f172a;
+      color: #94a3b8;
+      padding: 20px 24px;
+      border-radius: 10px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 8pt;
+      line-height: 1.55;
+      margin: 14px 0;
+      white-space: pre;
+      overflow-x: auto;
+    }
+
+    .diagram .hl-blue { color: #38bdf8; }
+    .diagram .hl-green { color: #4ade80; }
+    .diagram .hl-amber { color: #fbbf24; }
+    .diagram .hl-red { color: #f87171; }
+    .diagram .hl-purple { color: #a78bfa; }
+    .diagram .hl-white { color: #f1f5f9; }
+
+    /* ===== SECTION CARDS ===== */
+    .card-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin: 12px 0;
+    }
+
+    .card-grid-3 {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .card {
+      padding: 14px 16px;
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      background: #f8fafc;
+    }
+
+    .card h4 {
+      margin-top: 0;
+      font-size: 9.5pt;
+    }
+
+    .card p {
+      font-size: 8.5pt;
+      margin-bottom: 0;
+    }
+
+    .card-icon {
+      font-size: 18pt;
+      margin-bottom: 6px;
+    }
+
+    /* ===== TAGS / PILLS ===== */
+    .tag {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 5px;
+      font-size: 7.5pt;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+    }
+
+    .tag-red { background: #fee2e2; color: #dc2626; }
+    .tag-green { background: #d1fae5; color: #059669; }
+    .tag-blue { background: #dbeafe; color: #2563eb; }
+    .tag-amber { background: #fef3c7; color: #d97706; }
+    .tag-purple { background: #ede9fe; color: #7c3aed; }
+    .tag-gray { background: #f1f5f9; color: #475569; }
+
+    /* ===== FLOW STEPS ===== */
+    .flow-step {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 8px 0;
+    }
+
+    .flow-num {
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, #dc2626, #f97316);
+      color: #fff;
+      font-weight: 800;
+      font-size: 9pt;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .flow-content h4 { margin-top: 0; }
+    .flow-content p { font-size: 9pt; margin-bottom: 0; }
+
+    /* ===== AGENT STEP ===== */
+    .agent-step {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 7px 12px;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      margin-bottom: 6px;
+      background: #fff;
+    }
+
+    .agent-icon {
+      font-size: 14pt;
+      flex-shrink: 0;
+    }
+
+    .agent-step p {
+      font-size: 8.5pt;
+      margin-bottom: 0;
+    }
+
+    /* ===== TIMELINE ===== */
+    .timeline-table td:first-child {
+      font-weight: 700;
+      color: #dc2626;
+      white-space: nowrap;
+      width: 90px;
+    }
+
+    /* ===== IMPACT ROW ===== */
+    .impact-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 10px;
+      margin: 14px 0;
+    }
+
+    .impact-card {
+      text-align: center;
+      padding: 14px 8px;
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      background: #f8fafc;
+    }
+
+    .impact-num {
+      font-size: 22pt;
+      font-weight: 900;
+      letter-spacing: -1px;
+      line-height: 1.1;
+    }
+
+    .impact-label {
+      font-size: 7.5pt;
+      color: #64748b;
+      margin-top: 4px;
+      line-height: 1.3;
+    }
+
+    .num-red { color: #dc2626; }
+    .num-green { color: #059669; }
+    .num-amber { color: #d97706; }
+    .num-blue { color: #0ea5e9; }
+    .num-purple { color: #7c3aed; }
+
+    /* ===== TECH STACK TABLE ===== */
+    .tech-table td:first-child {
+      font-weight: 700;
+      color: #0f172a;
+      white-space: nowrap;
+      width: 130px;
+    }
+
+    .tech-tag {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 5px;
+      font-size: 8pt;
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 500;
+      background: #f1f5f9;
+      color: #475569;
+      margin: 2px 3px 2px 0;
+      border: 1px solid #e2e8f0;
+    }
+
+    .tech-tag.hl {
+      background: #ecfdf5;
+      color: #059669;
+      border-color: #a7f3d0;
+    }
+
+    /* ===== HORIZONTAL RULE ===== */
+    hr {
+      border: none;
+      height: 1px;
+      background: #e2e8f0;
+      margin: 24px 0;
+    }
+
+    /* ===== BUZZWORDS ===== */
+    .buzzwords {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin: 10px 0;
+    }
+
+    .buzz {
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 8pt;
+      font-weight: 600;
+      background: #f1f5f9;
+      color: #334155;
+      border: 1px solid #e2e8f0;
+    }
+
+    /* ===== FOOTER ===== */
+    .footer {
+      margin-top: 30px;
+      padding-top: 16px;
+      border-top: 2px solid #e2e8f0;
+      text-align: center;
+      font-size: 9pt;
+      color: #64748b;
+    }
+
+    .footer strong { color: #0f172a; }
+
+    /* ===== LIST STYLES ===== */
+    ul, ol {
+      margin: 8px 0;
+      padding-left: 20px;
+    }
+
+    li {
+      margin-bottom: 4px;
+      color: #475569;
+      font-size: 9.5pt;
+    }
+
+    li strong { color: #1e293b; }
+
+    /* ===== DATA SOURCES GRID ===== */
+    .source-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 10px 0;
+    }
+
+    .source-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 12px;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      font-size: 8pt;
+      font-weight: 500;
+      background: #fff;
+    }
+
+    .source-pill span:first-child { font-size: 11pt; }
+  </style>
+</head>
+<body>
+
+  <!-- ========== COVER PAGE ========== -->
+  <section class="cover">
+    <div class="cover-badges">
+      <span class="cover-badge badge-red">Problem #12 · Climate-Risk Scoring</span>
+      <span class="cover-badge badge-green">Problem #13 · Client Sustainability Strategy</span>
+    </div>
+    <div class="cover-line"></div>
+    <h1>Climate<span>Nexus</span></h1>
+    <p class="cover-tagline">Score the risk. Prescribe the cure.</p>
+    <p class="cover-description">
+      An end-to-end AI platform that scores climate risk on any property — then auto-generates
+      a tailored sustainability strategy for the client. From fragmented data to client-ready
+      action plans, in seconds, not weeks.
+    </p>
+    <div class="cover-meta">
+      <span class="cover-meta-item"><strong>JLL 2026 Hackathon</strong></span>
+      <span class="cover-meta-item">Author: <strong>Anjali Gupta</strong> (Data Engineer)</span>
+      <span class="cover-meta-item">June 2026</span>
+    </div>
+  </section>
+
+  <!-- ========== THE PROBLEM ========== -->
+  <div class="page-break"></div>
+
+  <h2>The Problem</h2>
+  <p>JLL brokers and asset managers face two disconnected pain points:</p>
+
+  <table>
+    <thead>
+      <tr><th>Pain Point</th><th>Current State</th><th>Impact</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Climate-risk assessment</strong></td>
+        <td>Fragmented across 8–12 data sources (FEMA, NOAA, local regs). Manual research takes <strong>3–5 days per property</strong>.</td>
+        <td>Deals delayed, risk mispriced, clients underserved</td>
+      </tr>
+      <tr>
+        <td><strong>Sustainability strategy</strong></td>
+        <td>Built manually by consultants using siloed playbooks. Takes <strong>weeks per client</strong>.</td>
+        <td>Can't scale advisory, brokers go to meetings without data</td>
+      </tr>
+      <tr>
+        <td><strong>The gap between them</strong></td>
+        <td>Risk scores sit in spreadsheets. Strategies don't reference actual risk data.</td>
+        <td>No connected value chain — risk insight never reaches the client action plan</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <blockquote>
+    <p><strong>Key differentiator:</strong> Most teams will tackle scoring <em>or</em> strategy in isolation. ClimateNexus <strong>connects both</strong> — mirroring how JLL's advisory actually works: the sustainability team <em>needs</em> risk data to advise clients.</p>
+  </blockquote>
+
+  <!-- ========== THE SOLUTION ========== -->
+  <hr />
+  <h2>The Solution: Climate<span class="accent">Nexus</span></h2>
+  <p>ClimateNexus chains the climate-risk score directly into a sustainability strategy recommendation engine. The risk score isn't just a number — it becomes the <strong>input signal</strong> that drives a tailored action plan.</p>
+
+  <h3>Pipeline Overview</h3>
+
+  <div class="diagram"><span class="hl-white">                    ┌─────────────────────────┐</span>
+<span class="hl-white">                    │</span>     <span class="hl-blue">PROPERTY INPUT</span>       <span class="hl-white">│</span>
+<span class="hl-white">                    │</span>  <span class="hl-blue">(address or portfolio)</span>  <span class="hl-white">│</span>
+<span class="hl-white">                    └────────────┬────────────┘</span>
+                                 ▼
+<span class="hl-white">                    ┌────────────────────────────────┐</span>
+<span class="hl-white">                    │</span>   <span class="hl-red">STAGE 1: CLIMATE SCORING</span>       <span class="hl-white">│</span>
+<span class="hl-white">                    │</span>                                 <span class="hl-white">│</span>
+<span class="hl-white">                    │</span>  • Multi-hazard data ingestion  <span class="hl-white">│</span>
+<span class="hl-white">                    │</span>  • ML risk scoring engine        <span class="hl-white">│</span>
+<span class="hl-white">                    │</span>  • Per-hazard sub-scores         <span class="hl-white">│</span>
+<span class="hl-white">                    │</span>  • SHAP explainability           <span class="hl-white">│</span>
+<span class="hl-white">                    └────────────┬────────────────────┘</span>
+                                 ▼
+<span class="hl-white">                    ┌────────────────────────────────┐</span>
+<span class="hl-white">                    │</span>   <span class="hl-purple">BRIDGE: RISK → STRATEGY</span>       <span class="hl-white">│</span>
+<span class="hl-white">                    │</span>                                 <span class="hl-white">│</span>
+<span class="hl-white">                    │</span>  • High flood → resilience recs <span class="hl-white">│</span>
+<span class="hl-white">                    │</span>  • High heat → cooling retrofits<span class="hl-white">│</span>
+<span class="hl-white">                    │</span>  • High transition → compliance <span class="hl-white">│</span>
+<span class="hl-white">                    └────────────┬────────────────────┘</span>
+                                 ▼
+<span class="hl-white">                    ┌────────────────────────────────┐</span>
+<span class="hl-white">                    │</span>  <span class="hl-green">STAGE 2: STRATEGY GENERATION</span>   <span class="hl-white">│</span>
+<span class="hl-white">                    │</span>                                 <span class="hl-white">│</span>
+<span class="hl-white">                    │</span>  • RAG over sustainability KB    <span class="hl-white">│</span>
+<span class="hl-white">                    │</span>  • Risk-aware recommendations    <span class="hl-white">│</span>
+<span class="hl-white">                    │</span>  • ROI-ranked action plan        <span class="hl-white">│</span>
+<span class="hl-white">                    │</span>  • Client-ready strategy deck    <span class="hl-white">│</span>
+<span class="hl-white">                    └────────────┬────────────────────┘</span>
+                                 ▼
+<span class="hl-white">                    ┌────────────────────────────────┐</span>
+<span class="hl-white">                    │</span>         <span class="hl-amber">DELIVERABLES</span>            <span class="hl-white">│</span>
+<span class="hl-white">                    │</span>                                 <span class="hl-white">│</span>
+<span class="hl-white">                    │</span>  🗺️ Risk Heatmap (interactive)  <span class="hl-white">│</span>
+<span class="hl-white">                    │</span>  📊 Climate Score Card           <span class="hl-white">│</span>
+<span class="hl-white">                    │</span>  📑 Strategy Deck (auto-gen)     <span class="hl-white">│</span>
+<span class="hl-white">                    │</span>  💰 Financial Impact Summary     <span class="hl-white">│</span>
+<span class="hl-white">                    │</span>  📋 Regulatory Compliance Check  <span class="hl-white">│</span>
+<span class="hl-white">                    └────────────────────────────────┘</span></div>
+
+  <!-- ========== STAGE 1 ========== -->
+  <div class="page-break"></div>
+
+  <h2>Stage 1: Multi-Hazard <span class="accent-warm">Climate Risk Scoring</span></h2>
+  <p>An ML-powered engine that ingests open climate data and produces an explainable <strong>composite risk score (0–100)</strong> per property.</p>
+
+  <h3>Hazard Dimensions</h3>
+  <div class="card-grid card-grid-3" style="grid-template-columns: repeat(4, 1fr);">
+    <div class="card" style="text-align: center;">
+      <div class="card-icon">🌊</div>
+      <h4>Flood</h4>
+      <p>FEMA zones, elevation, historical claims</p>
+    </div>
+    <div class="card" style="text-align: center;">
+      <div class="card-icon">🌡️</div>
+      <h4>Heat Stress</h4>
+      <p>NOAA projections, cooling degree days</p>
+    </div>
+    <div class="card" style="text-align: center;">
+      <div class="card-icon">🔥</div>
+      <h4>Wildfire</h4>
+      <p>NIFC perimeters, burn probability</p>
+    </div>
+    <div class="card" style="text-align: center;">
+      <div class="card-icon">⚖️</div>
+      <h4>Transition Risk</h4>
+      <p>LL97, BERDO, building perf. standards</p>
+    </div>
+  </div>
+
+  <h3>ML Architecture</h3>
+  <table>
+    <thead>
+      <tr><th>Component</th><th>Approach</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>Feature Engineering</strong></td><td>Geospatial features (PostGIS) + temporal features from public APIs</td></tr>
+      <tr><td><strong>Model</strong></td><td>XGBoost ensemble — per-hazard sub-models combined into composite score</td></tr>
+      <tr><td><strong>Training Data</strong></td><td>FEMA loss claims + insurance premium history (publicly available aggregates)</td></tr>
+      <tr><td><strong>Explainability</strong></td><td>SHAP values → shows exactly which hazards drive the score</td></tr>
+      <tr><td><strong>Financial Calibration</strong></td><td>Score mapped to expected annual loss (EAL) in dollar terms</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Data Sources <span style="font-weight: 400; color: #64748b;">(all free / open — zero licensing cost)</span></h3>
+  <table>
+    <thead>
+      <tr><th>Source</th><th>Data</th><th>Access Method</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>FEMA NFHL</td><td>Flood zones, base flood elevation</td><td><span class="tag tag-blue">REST API</span></td></tr>
+      <tr><td>NOAA NCEI</td><td>Historical weather extremes, climate normals</td><td><span class="tag tag-blue">REST API</span></td></tr>
+      <tr><td>NIFC / GeoMAC</td><td>Wildfire perimeters & burn probability</td><td><span class="tag tag-amber">GeoJSON</span></td></tr>
+      <tr><td>USGS Elevation</td><td>Terrain elevation for flood modeling</td><td><span class="tag tag-blue">REST API</span></td></tr>
+      <tr><td>First Street Foundation</td><td>Flood/fire/heat factor</td><td><span class="tag tag-blue">API</span></td></tr>
+      <tr><td>EPA ENERGY STAR</td><td>Building energy benchmarks</td><td><span class="tag tag-blue">API</span></td></tr>
+      <tr><td>Local gov portals</td><td>Building performance standards (LL97, BERDO)</td><td><span class="tag tag-purple">Scraped</span></td></tr>
+      <tr><td>OpenStreetMap</td><td>Building footprints, land use</td><td><span class="tag tag-green">Overpass API</span></td></tr>
+    </tbody>
+  </table>
+
+  <!-- ========== STAGE 2 ========== -->
+  <div class="page-break"></div>
+
+  <h2>Stage 2: RAG-Powered <span class="accent">Sustainability Strategist</span></h2>
+  <p>An AI agent that takes the risk scores and — through RAG over a sustainability knowledge base — generates a customized, client-ready action plan.</p>
+
+  <div class="card-grid">
+    <div>
+      <h3>Agent Tools</h3>
+      <div class="agent-step"><span class="agent-icon">🔍</span><p><strong>RAG Retriever</strong> — queries sustainability KB (LEED, LL97, IRA credits)</p></div>
+      <div class="agent-step"><span class="agent-icon">📊</span><p><strong>Portfolio Analyzer</strong> — parses client energy data, certifications, profiles</p></div>
+      <div class="agent-step"><span class="agent-icon">💲</span><p><strong>ROI Calculator</strong> — estimates retrofit costs, savings, payback period</p></div>
+      <div class="agent-step"><span class="agent-icon">🌐</span><p><strong>Incentive Finder</strong> — matches location to available rebates & tax credits</p></div>
+      <div class="agent-step"><span class="agent-icon">📈</span><p><strong>Benchmark Tool</strong> — compares client buildings against ENERGY STAR peers</p></div>
+      <div class="agent-step"><span class="agent-icon">📑</span><p><strong>Report Generator</strong> — creates client-ready strategy deck with visuals</p></div>
+    </div>
+    <div>
+      <h3>Knowledge Base (RAG)</h3>
+      <div class="card" style="margin-bottom: 8px;">
+        <p style="margin-bottom: 6px;"><span class="tag tag-green">CERTIFICATIONS</span></p>
+        <p>LEED v4.1, WELL v2, ENERGY STAR certification guides</p>
+      </div>
+      <div class="card" style="margin-bottom: 8px;">
+        <p style="margin-bottom: 6px;"><span class="tag tag-amber">REGULATIONS</span></p>
+        <p>LL97 (NYC), BERDO (Boston), EU Taxonomy, CSRD compliance</p>
+      </div>
+      <div class="card" style="margin-bottom: 8px;">
+        <p style="margin-bottom: 6px;"><span class="tag tag-blue">INCENTIVES</span></p>
+        <p>IRA tax credits, state rebates, utility programs from DSIRE</p>
+      </div>
+      <div class="card" style="margin-bottom: 8px;">
+        <p style="margin-bottom: 6px;"><span class="tag tag-red">TECHNOLOGY</span></p>
+        <p>Heat pumps, LED, solar, BMS upgrades — specs, costs & ROI</p>
+      </div>
+      <p style="font-size: 8.5pt; color: #7c3aed; margin-top: 10px;">
+        <strong>Vector Store:</strong> ChromaDB · <strong>Embeddings:</strong> text-embedding-3-small · <strong>Orchestration:</strong> LangGraph
+      </p>
+    </div>
+  </div>
+
+  <!-- ========== THE BRIDGE ========== -->
+  <hr />
+
+  <h2>The Bridge: Risk → Strategy</h2>
+  <p>This is the differentiator. The risk score doesn't just sit in a dashboard — it flows into the agent as context that shapes recommendations:</p>
+
+  <table>
+    <thead>
+      <tr><th>Risk Signal</th><th>Strategy Response</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>🌊 High flood score</td><td>Flood barriers, elevated mechanicals, insurance renegotiation, FEMA mitigation grants</td></tr>
+      <tr><td>🌡️ High heat score</td><td>Cool-roof retrofits, HVAC upgrades, IRA tax credit paths, shade/greenery interventions</td></tr>
+      <tr><td>🔥 High wildfire score</td><td>Ember-resistant materials, defensible space planning, wildfire insurance optimization</td></tr>
+      <tr><td>⚖️ High transition risk</td><td>Compliance pathway acceleration, certification roadmap (LEED/WELL), retrofit prioritization</td></tr>
+    </tbody>
+  </table>
+
+  <!-- ========== DEMO SCENARIO ========== -->
+  <div class="page-break"></div>
+
+  <h2>Demo Scenario</h2>
+  <blockquote class="callout-blue">
+    <p><strong>Imagine a JLL broker is pitching to a real estate fund with 50 properties across the US Southeast.</strong></p>
+  </blockquote>
+
+  <div style="margin: 16px 0;">
+    <div class="flow-step">
+      <div class="flow-num">1</div>
+      <div class="flow-content">
+        <h4>Upload portfolio</h4>
+        <p>Broker uploads a CSV of 50 property addresses. ClimateNexus geocodes each one.</p>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-num">2</div>
+      <div class="flow-content">
+        <h4>Instant risk scoring</h4>
+        <p>In 30 seconds, every property is scored. <strong style="color: #dc2626;">12 flagged high flood risk</strong>, <strong style="color: #d97706;">8 flagged extreme heat</strong>.</p>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-num">3</div>
+      <div class="flow-content">
+        <h4>AI generates strategy</h4>
+        <p>The agent auto-creates tailored recommendations — flood barriers for the 12, cool-roof retrofits for the 8, net-zero roadmap for all 50.</p>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-num">4</div>
+      <div class="flow-content">
+        <h4>Client-ready output</h4>
+        <p>A branded PDF deck with risk heatmap, action plan, <strong style="color: #059669;">$2.3M in incentives identified</strong>, and <strong style="color: #059669;">34% projected energy savings</strong>.</p>
+      </div>
+    </div>
+  </div>
+
+  <h3>Deliverables in the Output Deck</h3>
+  <div class="card-grid card-grid-3">
+    <div class="card" style="text-align: center;">
+      <div class="card-icon">🗺️</div>
+      <h4>Risk Heatmap</h4>
+      <p>Interactive portfolio map</p>
+    </div>
+    <div class="card" style="text-align: center;">
+      <div class="card-icon">📊</div>
+      <h4>Score Cards</h4>
+      <p>Per-property with SHAP</p>
+    </div>
+    <div class="card" style="text-align: center;">
+      <div class="card-icon">✅</div>
+      <h4>Action Plan</h4>
+      <p>Quick wins → capex-heavy</p>
+    </div>
+    <div class="card" style="text-align: center;">
+      <div class="card-icon">💰</div>
+      <h4>Financial Model</h4>
+      <p>Costs, savings, payback</p>
+    </div>
+    <div class="card" style="text-align: center;">
+      <div class="card-icon">🏆</div>
+      <h4>Incentives</h4>
+      <p>Matched tax credits</p>
+    </div>
+    <div class="card" style="text-align: center;">
+      <div class="card-icon">📋</div>
+      <h4>Compliance</h4>
+      <p>Regulatory checklist</p>
+    </div>
+  </div>
+
+  <!-- ========== TECH STACK ========== -->
+  <hr />
+
+  <h2>Tech Stack</h2>
+
+  <table class="tech-table">
+    <thead>
+      <tr><th>Layer</th><th>Technologies</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Data Ingestion</td>
+        <td>
+          <span class="tech-tag">Python</span>
+          <span class="tech-tag">httpx / aiohttp</span>
+          <span class="tech-tag">BeautifulSoup</span>
+          <span class="tech-tag hl">PostGIS</span>
+          <span class="tech-tag">GeoPandas</span>
+        </td>
+      </tr>
+      <tr>
+        <td>ML Scoring</td>
+        <td>
+          <span class="tech-tag hl">XGBoost</span>
+          <span class="tech-tag">scikit-learn</span>
+          <span class="tech-tag hl">SHAP</span>
+          <span class="tech-tag">LightGBM</span>
+        </td>
+      </tr>
+      <tr>
+        <td>RAG</td>
+        <td>
+          <span class="tech-tag hl">ChromaDB</span>
+          <span class="tech-tag">text-embedding-3</span>
+          <span class="tech-tag">LangChain</span>
+        </td>
+      </tr>
+      <tr>
+        <td>Agent</td>
+        <td>
+          <span class="tech-tag hl">LangGraph</span>
+          <span class="tech-tag">Gemini 2.5 Pro</span>
+          <span class="tech-tag">Tool-use</span>
+        </td>
+      </tr>
+      <tr>
+        <td>Frontend</td>
+        <td>
+          <span class="tech-tag hl">Streamlit</span>
+          <span class="tech-tag">Plotly</span>
+          <span class="tech-tag">Folium</span>
+          <span class="tech-tag">WeasyPrint</span>
+        </td>
+      </tr>
+      <tr>
+        <td>Infra</td>
+        <td>
+          <span class="tech-tag">PostgreSQL</span>
+          <span class="tech-tag">Docker</span>
+          <span class="tech-tag">FastAPI</span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- ========== BUILD PLAN ========== -->
+  <div class="page-break"></div>
+
+  <h2>48-Hour Build Plan</h2>
+
+  <table class="timeline-table">
+    <thead>
+      <tr><th>When</th><th>Task</th><th>Output</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Day 1 AM</td><td>Set up data pipeline: FEMA flood + NOAA heat APIs. Geocoding service. PostGIS schema.</td><td>Working data ingestion for 2 hazards</td></tr>
+      <tr><td>Day 1 PM</td><td>Train XGBoost model on Miami/NYC data, build scoring API. Add SHAP.</td><td><code>/score?address=...</code> endpoint</td></tr>
+      <tr><td>Day 1 Eve</td><td>Build RAG pipeline: ingest 15–20 sustainability docs into ChromaDB.</td><td>ChromaDB populated, retrieval working</td></tr>
+      <tr><td>Day 2 AM</td><td>Build LangGraph agent: chain score → strategy generation. Wire tools.</td><td>Agent produces recommendations</td></tr>
+      <tr><td>Day 2 PM</td><td>Streamlit UI: map view + score cards + chat + PDF download.</td><td>Full demo-ready frontend</td></tr>
+      <tr><td>Day 2 Eve</td><td>Polish demo scenario, generate sample reports, rehearse pitch.</td><td>Presentation-ready</td></tr>
+    </tbody>
+  </table>
+
+  <!-- ========== BUSINESS IMPACT ========== -->
+  <hr />
+
+  <h2>Business Impact</h2>
+
+  <div class="impact-grid">
+    <div class="impact-card">
+      <div class="impact-num num-red">Days→Sec</div>
+      <div class="impact-label">Risk assessment<br/>time reduced</div>
+    </div>
+    <div class="impact-card">
+      <div class="impact-num num-green">10×</div>
+      <div class="impact-label">More strategies<br/>per consultant</div>
+    </div>
+    <div class="impact-card">
+      <div class="impact-num num-amber">$0</div>
+      <div class="impact-label">Data licensing<br/>cost (open data)</div>
+    </div>
+    <div class="impact-card">
+      <div class="impact-num num-blue">Global</div>
+      <div class="impact-label">Scalable to any<br/>market via APIs</div>
+    </div>
+    <div class="impact-card">
+      <div class="impact-num num-purple">E2E</div>
+      <div class="impact-label">Only solution<br/>linking #12 + #13</div>
+    </div>
+  </div>
+
+  <h3>Who Benefits</h3>
+  <table>
+    <tbody>
+      <tr><td><strong>🏢 Brokers</strong></td><td>Walk into client meetings with instant, data-backed climate intelligence</td></tr>
+      <tr><td><strong>📈 Asset Managers</strong></td><td>Portfolio-level risk heatmap with prioritized resilience investments</td></tr>
+      <tr><td><strong>🤝 Clients</strong></td><td>Personalized sustainability roadmaps with real ROI — not generic advice</td></tr>
+      <tr><td><strong>🏛️ JLL</strong></td><td>Differentiate advisory services; win more mandates in sustainability consulting</td></tr>
+    </tbody>
+  </table>
+
+  <!-- ========== JLL ECOSYSTEM ========== -->
+  <hr />
+
+  <h2>JLL Ecosystem Integration</h2>
+  <p>ClimateNexus is designed to plug directly into JLL's existing technology platforms:</p>
+
+  <div class="card-grid" style="grid-template-columns: repeat(4, 1fr);">
+    <div class="card" style="text-align: center;">
+      <div class="card-icon">🦅</div>
+      <h4>JLL Falcon</h4>
+      <p>Risk scores as a new market intelligence signal</p>
+    </div>
+    <div class="card" style="text-align: center;">
+      <div class="card-icon">📊</div>
+      <h4>JLL Azara</h4>
+      <p>Climate risk as a first-class analytics dimension</p>
+    </div>
+    <div class="card" style="text-align: center;">
+      <div class="card-icon">🌿</div>
+      <h4>Carbon Pathfinder</h4>
+      <p>Risk-aware decarbonization roadmaps</p>
+    </div>
+    <div class="card" style="text-align: center;">
+      <div class="card-icon">📋</div>
+      <h4>Risk Advisory</h4>
+      <p>Auto-draft advisory reports</p>
+    </div>
+  </div>
+
+  <!-- ========== TALKING POINTS ========== -->
+  <hr />
+
+  <h2>Key Talking Points</h2>
+
+  <div class="card-grid">
+    <div>
+      <h3>Why AI/ML is Essential</h3>
+      <ul>
+        <li><strong>Climate data is massive and fragmented</strong> — no human can synthesize FEMA, NOAA, satellite imagery, and local regulations for 50 properties manually</li>
+        <li><strong>Pattern recognition</strong> — ML models identify non-obvious correlations between climate features and property value impact</li>
+        <li><strong>Personalization at scale</strong> — RAG + Agents generate bespoke strategies per client without hiring more consultants</li>
+      </ul>
+    </div>
+    <div>
+      <h3>JLL-Specific Hooks 🎯</h3>
+      <ul>
+        <li>Integrates with <strong>JLL Falcon</strong> (market intelligence) and <strong>JLL Azara</strong> (analytics)</li>
+        <li>Extends <strong>Carbon Pathfinder</strong> with climate-risk awareness</li>
+        <li>Aligns with JLL's <strong>Sustainability Risk Advisory</strong> practice</li>
+        <li>Addresses the <strong>green premium / brown discount</strong> JLL research has documented</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>Buzzwords That Land Well</h3>
+  <div class="buzzwords">
+    <span class="buzz">Geospatial ML</span>
+    <span class="buzz">RAG-powered agents</span>
+    <span class="buzz">Explainable AI (SHAP)</span>
+    <span class="buzz">Multi-hazard scoring</span>
+    <span class="buzz">Agentic workflows</span>
+    <span class="buzz">LangGraph orchestration</span>
+    <span class="buzz">Real-time climate intelligence</span>
+    <span class="buzz">TCFD-aligned</span>
+    <span class="buzz">Net-zero pathways</span>
+  </div>
+
+  <!-- ========== FOOTER ========== -->
+  <div class="footer">
+    <p><strong>ClimateNexus</strong> — From fragmented climate data to client-ready sustainability strategies, in seconds, not weeks. 🚀</p>
+    <p style="margin-top: 4px;">JLL 2026 Hackathon · Problem Statements #12 & #13</p>
+  </div>
+
+</body>
+</html>
