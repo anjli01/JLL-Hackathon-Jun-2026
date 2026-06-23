@@ -16,3 +16,10 @@ data/climate_nexus.db
 # Environment variables
 .env
 *.env
+
+# Streamlit secrets (NEVER commit real secrets)
+.streamlit/secrets.toml
+
+# Generated reports
+reports/*.html
+reports/*.pdf

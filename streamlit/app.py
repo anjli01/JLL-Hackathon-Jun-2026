@@ -38,7 +38,7 @@ st.set_page_config(
 # ---------------------------------------------------------------------------
 
 if "api_base" not in st.session_state:
-    st.session_state.api_base = "http://127.0.0.1:8000"
+    st.session_state.api_base = st.secrets.get("API_BASE_URL", "http://127.0.0.1:8000")
 if "scored_results" not in st.session_state:
     st.session_state.scored_results = None
 if "strategy_response" not in st.session_state:

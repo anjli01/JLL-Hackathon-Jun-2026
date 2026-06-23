@@ -14,7 +14,7 @@ import os
 
 st.set_page_config(page_title="Portfolio Scorer — ClimateNexus", page_icon="🗺️", layout="wide")
 
-API = st.session_state.get("api_base", "http://127.0.0.1:8000")
+API = st.session_state.get("api_base", st.secrets.get("API_BASE_URL", "http://127.0.0.1:8000"))
 
 # ---------------------------------------------------------------------------
 # JLL Logo

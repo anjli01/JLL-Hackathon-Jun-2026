@@ -10,6 +10,7 @@ from statistics import mean as _mean
 
 import httpx
 from fastapi import FastAPI, HTTPException, UploadFile, File
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
 
 from src.api.models import (
@@ -111,6 +112,21 @@ app = FastAPI(
     ),
     version="1.0.0",
     lifespan=lifespan,
+)
+
+# ---------- CORS (allow Streamlit Cloud frontend) ----------
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+        "https://*.streamlit.app",   # Streamlit Community Cloud
+        "http://localhost:8501",      # Local Streamlit dev
+        "http://127.0.0.1:8501",     # Local Streamlit dev
+    ],
+    allow_origin_regex=r"https://.*\.streamlit\.app",
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 
