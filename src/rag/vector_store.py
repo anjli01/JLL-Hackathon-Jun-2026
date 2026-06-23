@@ -23,21 +23,39 @@ def _get_embedding_function():
     """
     Return a ChromaDB-compatible embedding function.
 
-    Uses Gemini text-embedding-004 if GOOGLE_API_KEY is set,
-    otherwise falls back to ChromaDB's built-in default embeddings.
+    Uses Gemini text-embedding-004 via the google-genai SDK if
+    GOOGLE_API_KEY is set, otherwise falls back to ChromaDB's built-in
+    default embeddings.
+
+    Note: ChromaDB's built-in GoogleGenerativeAiEmbeddingFunction is
+    broken in chromadb>=1.5 due to passing unsupported 'headers' to
+    genai.configure(). This custom wrapper avoids that issue.
     """
     api_key = os.environ.get("GOOGLE_API_KEY")
     if api_key:
         try:
-            from chromadb.utils.embedding_functions import (
-                GoogleGenerativeAiEmbeddingFunction,
-            )
+            from google import genai
+            from chromadb.api.types import EmbeddingFunction, Documents, Embeddings
 
-            logger.info("Using Gemini text-embedding-004 for vector store")
-            return GoogleGenerativeAiEmbeddingFunction(
-                api_key=api_key,
-                model_name="models/text-embedding-004",
-            )
+            class GeminiEmbeddingFunction(EmbeddingFunction):
+                """Custom Gemini embedding function using google-genai SDK."""
+
+                def __init__(self, api_key: str, model_name: str = "gemini-embedding-001"):
+                    self._client = genai.Client(api_key=api_key)
+                    self._model = model_name
+
+                def __call__(self, input: Documents) -> Embeddings:
+                    embeddings = []
+                    for text in input:
+                        result = self._client.models.embed_content(
+                            model=self._model,
+                            contents=text,
+                        )
+                        embeddings.append(result.embeddings[0].values)
+                    return embeddings
+
+            logger.info("Using Gemini gemini-embedding-001 for vector store")
+            return GeminiEmbeddingFunction(api_key=api_key)
         except Exception as exc:
             logger.warning("Failed to init Gemini embeddings: %s — using default", exc)
 

@@ -1,3 +1,6 @@
+from dotenv import load_dotenv
+load_dotenv()  # Load .env before anything reads os.environ
+
 import asyncio
 import csv
 import io

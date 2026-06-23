@@ -107,7 +107,7 @@ INCENTIVES_DB = [
         "states": None,
         "value": "75% federal cost share, up to $50M per project",
         "value_pct": 0.75,
-        "eligible_measures": ["flood_barriers", "elevated_mechanicals", "ember_resistant_roof"],
+        "eligible_measures": ["flood_barriers", "elevated_mechanicals", "ember_resistant_roof", "seismic_retrofit", "non_structural_bracing"],
         "description": "Annual competitive grant for pre-disaster resilience projects.",
     },
     {

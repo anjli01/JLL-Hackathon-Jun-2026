@@ -22,8 +22,14 @@ logger = logging.getLogger(__name__)
 _CATEGORY_MAP = {
     "ll97": "regulation",
     "berdo": "regulation",
+    "seattle_beps": "regulation",
+    "denver": "regulation",
+    "dc_beps": "regulation",
+    "california": "regulation",
     "leed": "certification",
     "energy_star": "benchmark",
+    "crrem": "benchmark",
+    "gresb": "benchmark",
     "ira_tax": "incentive",
     "fema_mitigation": "incentive",
     "heat_pump": "technology",
@@ -31,8 +37,12 @@ _CATEGORY_MAP = {
     "led_lighting": "technology",
     "solar_pv": "technology",
     "bms_upgrade": "technology",
+    "building_envelope": "technology",
+    "battery_storage": "technology",
     "flood_mitigation": "resilience",
     "wildfire": "resilience",
+    "seismic_retrofit": "resilience",
+    "climate_risk_insurance": "resilience",
     "green_premium": "benchmark",
 }
 

@@ -1,6 +1,7 @@
 fastapi
 uvicorn
 httpx
+python-dotenv
 beautifulsoup4
 xgboost
 shap
@@ -17,3 +18,9 @@ langchain-google-genai>=2.0
 chromadb>=1.0
 jinja2
 weasyprint
+# Frontend: Streamlit + dependencies
+streamlit
+plotly
+folium
+streamlit-folium
+requests

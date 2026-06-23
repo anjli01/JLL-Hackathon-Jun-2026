@@ -9,7 +9,7 @@ import requests
 
 st.set_page_config(page_title="Report Download — ClimateNexus", page_icon="📑", layout="wide")
 
-API = st.session_state.get("api_base", "http://127.0.0.1:8001")
+API = st.session_state.get("api_base", "http://127.0.0.1:8000")
 
 # ---------------------------------------------------------------------------
 # CSS

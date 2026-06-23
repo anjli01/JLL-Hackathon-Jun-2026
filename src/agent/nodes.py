@@ -46,8 +46,8 @@ RISK_STRATEGY_MAP = {
         "description": "Compliance pathway acceleration, certification roadmap, retrofit prioritization",
     },
     "seismic": {
-        "measures": [],
-        "description": "Structural assessment, seismic retrofit evaluation, insurance review",
+        "measures": ["seismic_retrofit", "non_structural_bracing"],
+        "description": "Structural assessment, seismic retrofit evaluation, foundation bolting, insurance review",
     },
 }
 
@@ -605,6 +605,38 @@ _REGULATION_DATABASE = {
         "penalty": "Fines up to $100/day for non-compliance",
         "pathway": "ENERGY STAR certification, LED lighting, BMS upgrades",
         "location_match": ["chicago", "il", "illinois"],
+    },
+    "Seattle BEPS": {
+        "jurisdiction": "Seattle, WA",
+        "requirement": "GHG emissions intensity targets for buildings >20,000 sq ft. Targets phase in 2031–2035.",
+        "deadline": "2027 (first reporting for large buildings), 2031 (first compliance period)",
+        "penalty": "Up to $10/sq ft for nonresidential, $7.50/sq ft for multifamily, $2.50/sq ft for low-income housing",
+        "pathway": "Electrification (90% hydro grid makes this highly effective), building envelope, LED lighting, BMS",
+        "location_match": ["seattle", "wa", "washington"],
+    },
+    "Energize Denver": {
+        "jurisdiction": "Denver, CO",
+        "requirement": "EUI performance targets for buildings ≥25,000 sq ft. Interim targets 2027, stricter 2030, final 2032.",
+        "deadline": "Annual benchmarking by June 1, performance targets 2027/2030/2032",
+        "penalty": "$0.30–$0.70 per kBtu over target, assessed annually",
+        "pathway": "Retro-commissioning, HVAC upgrades, LED lighting, solar PV (300+ sunny days/yr)",
+        "location_match": ["denver", "co", "colorado"],
+    },
+    "DC BEPS": {
+        "jurisdiction": "Washington, DC",
+        "requirement": "Energy performance targets for buildings >10,000 sq ft. 5-year compliance cycles toward carbon neutrality by 2045.",
+        "deadline": "Cycle 1: 2021–2026, Cycle 2: 2027–2032, Cycle 3: 2033–2038",
+        "penalty": "Up to $10/sq ft per year for non-compliance",
+        "pathway": "Electrification, retro-commissioning, LED lighting, DCSEU rebates, green energy procurement",
+        "location_match": ["dc", "washington dc", "district of columbia"],
+    },
+    "California SB 253 (Climate Corporate Data Accountability)": {
+        "jurisdiction": "California",
+        "requirement": "Companies >$1B revenue must report Scope 1, 2, 3 GHG emissions. SB 261 requires climate risk reports for >$500M revenue.",
+        "deadline": "2026 (Scope 1 & 2 reporting), 2027 (Scope 3 reporting)",
+        "penalty": "Administrative penalties for non-disclosure, reputational risk",
+        "pathway": "Building-level emissions tracking, energy audits, sub-metering, TCFD-aligned risk assessment",
+        "location_match": ["ca", "california", "los angeles", "san francisco", "san diego", "sacramento"],
     },
 }
 

@@ -12,7 +12,7 @@ from streamlit_folium import st_folium
 
 st.set_page_config(page_title="Portfolio Scorer — ClimateNexus", page_icon="🗺️", layout="wide")
 
-API = st.session_state.get("api_base", "http://127.0.0.1:8001")
+API = st.session_state.get("api_base", "http://127.0.0.1:8000")
 
 # ---------------------------------------------------------------------------
 # Custom CSS (shared styles)
@@ -321,6 +321,6 @@ for prop in results:
                 )
                 st.plotly_chart(fig_shap, use_container_width=True)
 
-        # Raw features
-        with st.expander("📄 Raw Features JSON"):
+        # Raw features (using checkbox instead of nested expander)
+        if st.checkbox("📄 Show Raw Features JSON", key=f"raw_{prop['address']}"):
             st.json(prop.get("raw_features", {}))

@@ -112,6 +112,30 @@ RETROFIT_MEASURES = {
         "description": "Class A fire-rated roofing with ember-resistant vents.",
         "risk_avoidance": True,
     },
+    "seismic_retrofit": {
+        "name": "Structural Seismic Retrofit",
+        "category": "seismic_mitigation",
+        "cost_per_sqft_low": 15.0,
+        "cost_per_sqft_high": 50.0,
+        "annual_savings_per_sqft_low": 0.0,
+        "annual_savings_per_sqft_high": 0.0,
+        "lifespan_years": 50,
+        "applicable_hazards": ["seismic"],
+        "description": "Structural strengthening (shear walls, steel bracing, foundation bolting) to resist earthquake forces.",
+        "risk_avoidance": True,
+    },
+    "non_structural_bracing": {
+        "name": "Non-Structural Seismic Bracing",
+        "category": "seismic_mitigation",
+        "cost_per_sqft_low": 2.0,
+        "cost_per_sqft_high": 5.0,
+        "annual_savings_per_sqft_low": 0.0,
+        "annual_savings_per_sqft_high": 0.0,
+        "lifespan_years": 30,
+        "applicable_hazards": ["seismic"],
+        "description": "Anchor mechanical equipment, brace ceilings and partitions, secure furniture for earthquake resilience.",
+        "risk_avoidance": True,
+    },
 }
 
 
