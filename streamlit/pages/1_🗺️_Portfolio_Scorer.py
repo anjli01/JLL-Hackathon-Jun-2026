@@ -9,10 +9,25 @@ import pandas as pd
 import plotly.graph_objects as go
 import folium
 from streamlit_folium import st_folium
+import base64
+import os
 
 st.set_page_config(page_title="Portfolio Scorer — ClimateNexus", page_icon="🗺️", layout="wide")
 
 API = st.session_state.get("api_base", "http://127.0.0.1:8000")
+
+# ---------------------------------------------------------------------------
+# JLL Logo
+# ---------------------------------------------------------------------------
+
+def get_jll_logo_base64():
+    logo_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "assets", "jll_logo.png")
+    with open(logo_path, "rb") as f:
+        img_data = f.read()
+    encoded = base64.b64encode(img_data).decode()
+    return f"data:image/png;base64,{encoded}"
+
+JLL_LOGO = get_jll_logo_base64()
 
 # ---------------------------------------------------------------------------
 # Custom CSS (shared styles)
@@ -35,9 +50,14 @@ st.markdown("""
 # Header
 # ---------------------------------------------------------------------------
 
-st.markdown("# 🗺️ Portfolio Scorer")
-st.markdown("Upload a portfolio of properties and score each one for multi-hazard climate risk.")
+col_logo, col_title = st.columns([1, 5])
+with col_logo:
+    st.markdown(f'<img src="{JLL_LOGO}" alt="JLL Logo" style="width: 100px; margin-top: 8px;">', unsafe_allow_html=True)
+with col_title:
+    st.markdown("# 🗺️ Portfolio Scorer")
+    st.markdown("Upload a portfolio of properties and score each one for multi-hazard climate risk.")
 st.markdown("---")
+
 
 # ---------------------------------------------------------------------------
 # Input section — 3 tabs

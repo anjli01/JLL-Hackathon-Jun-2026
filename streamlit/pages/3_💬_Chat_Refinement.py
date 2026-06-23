@@ -5,10 +5,25 @@ Broker chat interface with strategy context awareness.
 
 import streamlit as st
 import requests
+import base64
+import os
 
 st.set_page_config(page_title="Chat Refinement — ClimateNexus", page_icon="💬", layout="wide")
 
 API = st.session_state.get("api_base", "http://127.0.0.1:8000")
+
+# ---------------------------------------------------------------------------
+# JLL Logo
+# ---------------------------------------------------------------------------
+
+def get_jll_logo_base64():
+    logo_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "assets", "jll_logo.png")
+    with open(logo_path, "rb") as f:
+        img_data = f.read()
+    encoded = base64.b64encode(img_data).decode()
+    return f"data:image/png;base64,{encoded}"
+
+JLL_LOGO = get_jll_logo_base64()
 
 # ---------------------------------------------------------------------------
 # CSS
@@ -25,9 +40,14 @@ st.markdown("""
 # Header
 # ---------------------------------------------------------------------------
 
-st.markdown("# 💬 Chat Refinement")
-st.markdown("Ask follow-up questions to customize the strategy for your client.")
+col_logo, col_title = st.columns([1, 5])
+with col_logo:
+    st.markdown(f'<img src="{JLL_LOGO}" alt="JLL Logo" style="width: 100px; margin-top: 8px;">', unsafe_allow_html=True)
+with col_title:
+    st.markdown("# 💬 Chat Refinement")
+    st.markdown("Ask follow-up questions to customize the strategy for your client.")
 st.markdown("---")
+
 
 # ---------------------------------------------------------------------------
 # Check prereqs

@@ -5,6 +5,22 @@ Entry point for the multi-page Streamlit app.
 
 import streamlit as st
 import requests
+import base64
+import os
+
+# ---------------------------------------------------------------------------
+# JLL Logo Helper
+# ---------------------------------------------------------------------------
+
+def get_jll_logo_base64():
+    """Read the JLL logo PNG and return base64-encoded data URI."""
+    logo_path = os.path.join(os.path.dirname(__file__), "assets", "jll_logo.png")
+    with open(logo_path, "rb") as f:
+        img_data = f.read()
+    encoded = base64.b64encode(img_data).decode()
+    return f"data:image/png;base64,{encoded}"
+
+JLL_LOGO = get_jll_logo_base64()
 
 # ---------------------------------------------------------------------------
 # Page Config
@@ -124,6 +140,11 @@ st.markdown("""
 # ---------------------------------------------------------------------------
 
 with st.sidebar:
+    st.markdown(f"""
+    <div style="text-align: center; margin-bottom: 12px;">
+        <img src="{JLL_LOGO}" alt="JLL Logo" style="width: 120px; margin-bottom: 8px;">
+    </div>
+    """, unsafe_allow_html=True)
     st.markdown("### 🏢 **ClimateNexus**")
     st.caption("by JLL · 2026 Hackathon")
     st.markdown("---")
@@ -139,22 +160,26 @@ with st.sidebar:
         st.markdown('<span class="status-err">● Backend Offline</span>', unsafe_allow_html=True)
 
     st.markdown("---")
-    st.markdown(
-        "**ClimateNexus** v1.0  \n"
-        "JLL 2026 Hackathon  \n"
-        "*Score the risk. Prescribe the cure.*"
-    )
+    st.markdown(f"""
+    <div style="text-align: center; opacity: 0.8; margin-top: 8px;">
+        <img src="{JLL_LOGO}" alt="JLL" style="width: 60px; opacity: 0.7; margin-bottom: 4px;"><br>
+        <small>ClimateNexus v1.0<br>JLL 2026 Hackathon<br><em>Score the risk. Prescribe the cure.</em></small>
+    </div>
+    """, unsafe_allow_html=True)
 
 # ---------------------------------------------------------------------------
 # Hero
 # ---------------------------------------------------------------------------
 
-st.markdown("""
+st.markdown(f"""
 <div class="hero">
+    <div style="margin-bottom: 16px;">
+        <img src="{JLL_LOGO}" alt="JLL Logo" style="width: 140px; filter: brightness(1.15); margin-bottom: 8px;">
+    </div>
     <h1>🏢 ClimateNexus</h1>
     <div class="tagline">Score the risk. Prescribe the cure.</div>
     <div class="subtitle">
-        AI-powered climate risk scoring & sustainability strategy generation<br>
+        AI-powered climate risk scoring &amp; sustainability strategy generation<br>
         for commercial real estate portfolios
     </div>
 </div>
