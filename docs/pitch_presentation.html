@@ -1,0 +1,1445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ClimateNexus — Pitch Deck | JLL 2026 Hackathon</title>
+  <meta name="description" content="ClimateNexus: An end-to-end AI platform that scores multi-hazard climate risk on any commercial property and auto-generates a tailored sustainability strategy with ROI-ranked action plans." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg-dark:       #060b14;
+      --bg-card:       #0d1626;
+      --bg-card2:      #111d32;
+      --accent-cyan:   #00d4ff;
+      --accent-green:  #00e5a0;
+      --accent-amber:  #ffb830;
+      --accent-red:    #ff5c5c;
+      --accent-purple: #a78bfa;
+      --text-primary:  #f0f6ff;
+      --text-muted:    #8aa0c0;
+      --border:        rgba(255,255,255,0.07);
+      --glow-cyan:     0 0 40px rgba(0,212,255,0.25);
+      --glow-green:    0 0 40px rgba(0,229,160,0.2);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg-dark);
+      color: var(--text-primary);
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 48px;
+      background: rgba(6,11,20,0.85);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.3rem; font-weight: 700;
+      background: linear-gradient(90deg, var(--accent-cyan), var(--accent-green));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .nav-links { display: flex; gap: 32px; list-style: none; }
+    .nav-links a {
+      color: var(--text-muted); text-decoration: none;
+      font-size: 0.88rem; font-weight: 500; letter-spacing: 0.03em;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--accent-cyan); }
+
+    /* ── SECTIONS ── */
+    section { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 120px 80px 80px; position: relative; overflow: hidden; }
+    section + section { border-top: 1px solid var(--border); }
+
+    /* ── HERO ── */
+    #hero {
+      background: radial-gradient(ellipse 80% 60% at 50% -10%, rgba(0,212,255,0.12) 0%, transparent 70%),
+                  radial-gradient(ellipse 60% 40% at 80% 80%, rgba(0,229,160,0.08) 0%, transparent 60%),
+                  var(--bg-dark);
+      text-align: center; align-items: center;
+    }
+    .hero-tag {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(0,212,255,0.1); border: 1px solid rgba(0,212,255,0.3);
+      border-radius: 100px; padding: 6px 18px; font-size: 0.78rem;
+      letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent-cyan);
+      margin-bottom: 28px; font-weight: 600;
+    }
+    .hero-tag .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent-cyan); animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.4;transform:scale(1.3)} }
+
+    .hero-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(3rem, 7vw, 5.5rem);
+      font-weight: 800; line-height: 1.05; letter-spacing: -0.02em;
+      margin-bottom: 16px;
+    }
+    .hero-title .glow {
+      background: linear-gradient(135deg, var(--accent-cyan) 0%, var(--accent-green) 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .hero-tagline {
+      font-size: 1.45rem; color: var(--text-muted); font-weight: 300;
+      letter-spacing: 0.02em; margin-bottom: 48px;
+    }
+    .hero-tagline em { color: var(--accent-amber); font-style: normal; font-weight: 500; }
+
+    .hero-pills { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; margin-bottom: 56px; }
+    .pill {
+      padding: 8px 20px; border-radius: 100px; font-size: 0.82rem; font-weight: 600;
+      background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+      color: var(--text-muted); transition: all 0.25s;
+    }
+    .pill:hover { background: rgba(0,212,255,0.1); border-color: rgba(0,212,255,0.4); color: var(--accent-cyan); }
+
+    .hero-stat-row { display: flex; gap: 32px; justify-content: center; flex-wrap: wrap; }
+    .hero-stat {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 16px; padding: 24px 32px; text-align: center; min-width: 160px;
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+    .hero-stat:hover { transform: translateY(-4px); box-shadow: var(--glow-cyan); }
+    .hero-stat .big { font-size: 2.4rem; font-weight: 800; font-family: 'Space Grotesk',sans-serif; }
+    .hero-stat .lbl { font-size: 0.78rem; color: var(--text-muted); margin-top: 4px; text-transform: uppercase; letter-spacing: 0.08em; }
+
+    /* ── SECTION HEADER ── */
+    .section-label {
+      font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--accent-cyan); font-weight: 700; margin-bottom: 12px;
+    }
+    .section-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 700;
+      line-height: 1.1; margin-bottom: 16px; letter-spacing: -0.02em;
+    }
+    .section-sub { font-size: 1.05rem; color: var(--text-muted); max-width: 680px; line-height: 1.7; margin-bottom: 56px; }
+
+    /* ── WHY/PROBLEM ── */
+    #why {
+      background: radial-gradient(ellipse 70% 50% at 0% 50%, rgba(255,88,88,0.07) 0%, transparent 60%), var(--bg-dark);
+    }
+    .problem-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .problem-card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 20px; padding: 32px;
+      position: relative; overflow: hidden;
+      transition: transform 0.25s, border-color 0.25s;
+    }
+    .problem-card:hover { transform: translateY(-6px); }
+    .problem-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--accent-red), var(--accent-amber));
+    }
+    .problem-card .icon { font-size: 2.4rem; margin-bottom: 16px; }
+    .problem-card h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 10px; color: var(--text-primary); }
+    .problem-card p { font-size: 0.88rem; color: var(--text-muted); line-height: 1.65; }
+    .problem-card .stat-badge {
+      margin-top: 16px; display: inline-block;
+      background: rgba(255,88,88,0.12); border: 1px solid rgba(255,88,88,0.3);
+      border-radius: 8px; padding: 6px 14px;
+      font-size: 0.8rem; font-weight: 700; color: var(--accent-red);
+    }
+
+    .cost-row { display: flex; gap: 20px; margin-top: 40px; flex-wrap: wrap; }
+    .cost-card {
+      flex: 1; min-width: 200px;
+      background: var(--bg-card2); border: 1px solid var(--border); border-radius: 16px;
+      padding: 20px 24px; display: flex; align-items: center; gap: 16px;
+    }
+    .cost-icon { font-size: 1.8rem; }
+    .cost-card .label { font-size: 0.78rem; color: var(--text-muted); margin-bottom: 4px; }
+    .cost-card .value { font-size: 1.2rem; font-weight: 700; color: var(--accent-amber); }
+
+    /* ── HOW IT WORKS ── */
+    #how {
+      background: radial-gradient(ellipse 70% 50% at 100% 50%, rgba(0,212,255,0.07) 0%, transparent 60%), var(--bg-dark);
+    }
+    .pipeline {
+      display: flex; align-items: stretch; gap: 0; position: relative;
+    }
+    .pipeline-stage {
+      flex: 1; background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 20px; padding: 32px 28px; position: relative;
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+    .pipeline-stage:hover { transform: translateY(-6px); box-shadow: var(--glow-cyan); }
+    .pipeline-arrow {
+      display: flex; align-items: center; padding: 0 8px; color: var(--accent-cyan);
+      font-size: 1.6rem; flex-shrink: 0;
+    }
+    .stage-num {
+      font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--accent-cyan); font-weight: 700; margin-bottom: 8px;
+    }
+    .pipeline-stage h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 12px; }
+    .pipeline-stage ul { list-style: none; }
+    .pipeline-stage ul li {
+      font-size: 0.82rem; color: var(--text-muted); padding: 4px 0;
+      display: flex; align-items: flex-start; gap: 8px; line-height: 1.5;
+    }
+    .pipeline-stage ul li::before { content: '→'; color: var(--accent-cyan); flex-shrink: 0; }
+
+    .apis-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 40px; }
+    .api-chip {
+      background: var(--bg-card2); border: 1px solid var(--border);
+      border-radius: 12px; padding: 14px 16px;
+      font-size: 0.8rem; font-weight: 600; color: var(--text-primary);
+      display: flex; align-items: center; gap: 8px;
+      transition: all 0.2s;
+    }
+    .api-chip:hover { border-color: var(--accent-cyan); color: var(--accent-cyan); background: rgba(0,212,255,0.05); }
+    .api-chip .hazard { font-size: 1.2rem; }
+
+    /* ── RISK & SOLUTIONS ── */
+    #risks {
+      background: radial-gradient(ellipse 60% 50% at 50% 100%, rgba(167,139,250,0.07) 0%, transparent 60%), var(--bg-dark);
+    }
+    .risk-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+    .risk-card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 20px; padding: 32px; overflow: hidden; position: relative;
+      transition: transform 0.25s;
+    }
+    .risk-card:hover { transform: translateY(-4px); }
+    .risk-header { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; }
+    .risk-icon { font-size: 2rem; }
+    .risk-header h3 { font-size: 1rem; font-weight: 700; }
+    .risk-header .score-badge {
+      margin-left: auto; padding: 4px 12px; border-radius: 100px;
+      font-size: 0.75rem; font-weight: 700;
+    }
+    .score-high { background: rgba(255,92,92,0.15); color: var(--accent-red); border: 1px solid rgba(255,92,92,0.3); }
+    .score-med { background: rgba(255,184,48,0.15); color: var(--accent-amber); border: 1px solid rgba(255,184,48,0.3); }
+
+    .risk-solution {
+      display: flex; gap: 16px; margin-top: 16px;
+    }
+    .risk-side {
+      flex: 1; padding: 14px 16px; border-radius: 12px;
+      font-size: 0.81rem; line-height: 1.55;
+    }
+    .risk-side.problem-side { background: rgba(255,92,92,0.06); border: 1px solid rgba(255,92,92,0.15); }
+    .risk-side.solution-side { background: rgba(0,229,160,0.06); border: 1px solid rgba(0,229,160,0.15); }
+    .risk-side .side-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 700; margin-bottom: 8px; }
+    .risk-side.problem-side .side-label { color: var(--accent-red); }
+    .risk-side.solution-side .side-label { color: var(--accent-green); }
+    .risk-side p { color: var(--text-muted); }
+
+    /* ── IMPACT ── */
+    #impact {
+      background: radial-gradient(ellipse 80% 60% at 50% 110%, rgba(0,229,160,0.1) 0%, transparent 60%), var(--bg-dark);
+    }
+    .impact-table {
+      width: 100%; border-collapse: collapse; border-radius: 16px; overflow: hidden;
+    }
+    .impact-table th {
+      background: rgba(0,212,255,0.1); padding: 14px 20px;
+      text-align: left; font-size: 0.78rem; text-transform: uppercase;
+      letter-spacing: 0.1em; color: var(--accent-cyan); font-weight: 700;
+    }
+    .impact-table td {
+      padding: 16px 20px; border-bottom: 1px solid var(--border);
+      font-size: 0.9rem;
+    }
+    .impact-table tr:last-child td { border-bottom: none; }
+    .impact-table tr:hover td { background: rgba(255,255,255,0.02); }
+    .impact-table .before { color: var(--accent-red); font-weight: 600; }
+    .impact-table .after { color: var(--accent-green); font-weight: 700; }
+    .impact-table .metric { font-weight: 600; color: var(--text-primary); }
+
+    .who-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-top: 48px; }
+    .who-card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 16px; padding: 24px 20px; text-align: center;
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+    .who-card:hover { transform: translateY(-6px); box-shadow: var(--glow-green); }
+    .who-card .icon { font-size: 2.2rem; margin-bottom: 12px; }
+    .who-card h4 { font-size: 0.95rem; font-weight: 700; margin-bottom: 8px; }
+    .who-card p { font-size: 0.8rem; color: var(--text-muted); line-height: 1.55; }
+
+    /* ── DEMO ── */
+    #demo {
+      background: radial-gradient(ellipse 60% 50% at 0% 0%, rgba(0,212,255,0.08) 0%, transparent 60%), var(--bg-dark);
+    }
+    .demo-steps { display: flex; flex-direction: column; gap: 20px; max-width: 780px; }
+    .demo-step {
+      display: flex; gap: 24px; align-items: flex-start;
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 16px; padding: 24px 28px;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+    .demo-step:hover { transform: translateX(8px); border-color: rgba(0,212,255,0.3); }
+    .step-num {
+      width: 40px; height: 40px; border-radius: 12px; flex-shrink: 0;
+      background: linear-gradient(135deg, var(--accent-cyan), var(--accent-green));
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 800; font-size: 1rem; font-family: 'Space Grotesk', sans-serif;
+      color: var(--bg-dark);
+    }
+    .demo-step h4 { font-size: 0.95rem; font-weight: 700; margin-bottom: 6px; }
+    .demo-step p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; }
+    .demo-step em { color: var(--accent-amber); font-style: normal; font-weight: 500; }
+
+    .demo-side {
+      flex: 0 0 360px; margin-left: auto;
+    }
+    .demo-screen {
+      background: var(--bg-card2); border: 1px solid var(--border);
+      border-radius: 20px; overflow: hidden;
+      box-shadow: 0 40px 80px rgba(0,0,0,0.5), var(--glow-cyan);
+    }
+    .screen-bar { background: rgba(255,255,255,0.05); padding: 12px 16px; display: flex; align-items: center; gap: 8px; }
+    .screen-dot { width: 10px; height: 10px; border-radius: 50%; }
+    .screen-pad { padding: 24px; }
+    .mock-score {
+      text-align: center; padding: 20px;
+      background: rgba(0,212,255,0.05); border: 1px solid rgba(0,212,255,0.2);
+      border-radius: 14px; margin-bottom: 16px;
+    }
+    .mock-score .score-big { font-size: 4rem; font-weight: 900; font-family: 'Space Grotesk',sans-serif; color: var(--accent-amber); line-height: 1; }
+    .mock-score .score-label { font-size: 0.75rem; color: var(--text-muted); margin-top: 4px; }
+    .mock-bars { display: flex; flex-direction: column; gap: 10px; }
+    .mock-bar-row { display: flex; align-items: center; gap: 10px; }
+    .mock-bar-row .bl { font-size: 0.75rem; color: var(--text-muted); width: 90px; flex-shrink: 0; }
+    .bar-track { flex: 1; height: 8px; background: rgba(255,255,255,0.07); border-radius: 100px; overflow: hidden; }
+    .bar-fill { height: 100%; border-radius: 100px; transition: width 1s ease; }
+    .bar-val { font-size: 0.75rem; font-weight: 700; width: 30px; text-align: right; }
+
+    .demo-wrapper { display: flex; gap: 48px; align-items: flex-start; }
+
+    /* ── TECH ── */
+    #tech {
+      background: var(--bg-dark);
+      min-height: auto; padding: 80px;
+    }
+    .tech-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .tech-card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 16px; padding: 24px;
+      transition: transform 0.2s;
+    }
+    .tech-card:hover { transform: translateY(-4px); }
+    .tech-card .t-label { font-size: 0.72rem; color: var(--accent-purple); text-transform: uppercase; letter-spacing: 0.1em; font-weight: 700; margin-bottom: 8px; }
+    .tech-card .t-name { font-size: 1rem; font-weight: 700; margin-bottom: 6px; }
+    .tech-card .t-desc { font-size: 0.8rem; color: var(--text-muted); line-height: 1.5; }
+
+    /* ── CLOSING ── */
+    #closing {
+      background: radial-gradient(ellipse 80% 70% at 50% 50%, rgba(0,212,255,0.1) 0%, rgba(0,229,160,0.06) 40%, transparent 70%), var(--bg-dark);
+      text-align: center; align-items: center;
+    }
+    .closing-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 800;
+      line-height: 1.1; margin-bottom: 20px; letter-spacing: -0.02em;
+    }
+    .closing-title .highlight {
+      background: linear-gradient(135deg, var(--accent-cyan), var(--accent-green));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .closing-sub { font-size: 1.1rem; color: var(--text-muted); max-width: 600px; line-height: 1.7; margin-bottom: 48px; }
+
+    .cta-row { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+    .btn-primary {
+      padding: 16px 36px; border-radius: 12px; font-size: 1rem; font-weight: 700;
+      background: linear-gradient(135deg, var(--accent-cyan), var(--accent-green));
+      color: var(--bg-dark); border: none; cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s; text-decoration: none;
+      display: inline-flex; align-items: center; gap: 8px;
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 40px rgba(0,212,255,0.4); }
+    .btn-outline {
+      padding: 16px 36px; border-radius: 12px; font-size: 1rem; font-weight: 700;
+      background: transparent; color: var(--accent-cyan);
+      border: 1.5px solid rgba(0,212,255,0.4); cursor: pointer;
+      transition: all 0.2s; text-decoration: none;
+      display: inline-flex; align-items: center; gap: 8px;
+    }
+    .btn-outline:hover { background: rgba(0,212,255,0.08); border-color: var(--accent-cyan); }
+
+    .jll-integrations { display: flex; gap: 16px; justify-content: center; margin-top: 56px; flex-wrap: wrap; }
+    .jll-chip {
+      background: rgba(255,255,255,0.04); border: 1px solid var(--border);
+      border-radius: 10px; padding: 10px 18px; font-size: 0.82rem;
+      color: var(--text-muted); font-weight: 500;
+      transition: all 0.2s;
+    }
+    .jll-chip span { color: var(--accent-cyan); font-weight: 700; }
+    .jll-chip:hover { background: rgba(0,212,255,0.05); border-color: rgba(0,212,255,0.3); color: var(--text-primary); }
+
+    /* ── FLOATING PARTICLES ── */
+    .particles { position: fixed; inset: 0; pointer-events: none; z-index: 0; }
+    .particle {
+      position: absolute; border-radius: 50%;
+      background: radial-gradient(circle, var(--accent-cyan) 0%, transparent 70%);
+      opacity: 0.08; animation: float linear infinite;
+    }
+    @keyframes float {
+      0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+      10% { opacity: 0.08; }
+      90% { opacity: 0.08; }
+      100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+    }
+
+    /* ── PROGRESS BAR ── */
+    .progress-bar {
+      position: fixed; top: 0; left: 0; height: 3px; z-index: 200;
+      background: linear-gradient(90deg, var(--accent-cyan), var(--accent-green));
+      transition: width 0.1s;
+    }
+
+    /* ── ANIMATED GRID BG ── */
+    .grid-bg {
+      position: absolute; inset: 0; z-index: 0; pointer-events: none;
+      background-image:
+        linear-gradient(rgba(0,212,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,212,255,0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+      mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 0%, transparent 100%);
+    }
+
+    section > * { position: relative; z-index: 1; }
+
+    /* ── ROI / VALUE ── */
+    #roi {
+      background: radial-gradient(ellipse 70% 50% at 30% 80%, rgba(0,229,160,0.09) 0%, transparent 60%),
+                  radial-gradient(ellipse 50% 40% at 80% 20%, rgba(0,212,255,0.07) 0%, transparent 60%),
+                  var(--bg-dark);
+    }
+
+    .invest-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-bottom: 56px; }
+    .invest-card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 20px; padding: 32px; text-align: center;
+      position: relative; overflow: hidden;
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+    .invest-card:hover { transform: translateY(-6px); box-shadow: var(--glow-green); }
+    .invest-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--accent-cyan), var(--accent-green));
+    }
+    .invest-card .ic-icon { font-size: 2.2rem; margin-bottom: 14px; }
+    .invest-card .ic-value {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 2.6rem; font-weight: 800; line-height: 1;
+      background: linear-gradient(135deg, var(--accent-cyan), var(--accent-green));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      margin-bottom: 8px;
+    }
+    .invest-card .ic-label { font-size: 0.85rem; color: var(--text-muted); font-weight: 500; }
+
+    .tam-block {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 32px;
+      margin-bottom: 56px; align-items: center;
+    }
+    .tam-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .tam-stat {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 16px; padding: 24px; text-align: center;
+      transition: transform 0.25s;
+    }
+    .tam-stat:hover { transform: translateY(-4px); }
+    .tam-stat .ts-num {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.8rem; font-weight: 800; color: var(--accent-cyan); line-height: 1;
+      margin-bottom: 6px;
+    }
+    .tam-stat .ts-label { font-size: 0.78rem; color: var(--text-muted); line-height: 1.4; }
+    .tam-narrative {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 20px; padding: 32px;
+    }
+    .tam-narrative h3 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.3rem; font-weight: 700; margin-bottom: 16px;
+      color: var(--text-primary);
+    }
+    .tam-narrative p { font-size: 0.92rem; color: var(--text-muted); line-height: 1.7; margin-bottom: 16px; }
+    .tam-narrative .tam-source {
+      font-size: 0.72rem; color: var(--text-muted); opacity: 0.7;
+      border-top: 1px solid var(--border); padding-top: 12px;
+    }
+    .tam-narrative .tam-source a { color: var(--accent-cyan); text-decoration: none; }
+    .tam-narrative .tam-source a:hover { text-decoration: underline; }
+
+    .compare-block { margin-bottom: 56px; }
+    .compare-table {
+      width: 100%; border-collapse: collapse; border-radius: 16px; overflow: hidden;
+      background: var(--bg-card); border: 1px solid var(--border);
+    }
+    .compare-table th {
+      padding: 16px 24px; text-align: left;
+      font-size: 0.82rem; font-weight: 700;
+      letter-spacing: 0.05em;
+    }
+    .compare-table th:first-child { background: rgba(255,255,255,0.03); color: var(--text-muted); }
+    .compare-table th.costar-col { background: rgba(255,92,92,0.08); color: var(--accent-red); text-transform: uppercase; letter-spacing: 0.1em; }
+    .compare-table th.cn-col { background: rgba(0,229,160,0.08); color: var(--accent-green); text-transform: uppercase; letter-spacing: 0.1em; }
+    .compare-table td {
+      padding: 14px 24px; border-top: 1px solid var(--border);
+      font-size: 0.88rem;
+    }
+    .compare-table td:first-child { font-weight: 600; color: var(--text-primary); }
+    .compare-table td:nth-child(2) { color: var(--text-muted); }
+    .compare-table td:nth-child(3) { color: var(--accent-green); font-weight: 600; }
+    .compare-table tr:hover td { background: rgba(255,255,255,0.015); }
+    .compare-note {
+      margin-top: 16px; padding: 14px 20px;
+      background: rgba(0,212,255,0.05); border: 1px solid rgba(0,212,255,0.15);
+      border-radius: 12px; font-size: 0.82rem; color: var(--text-muted); line-height: 1.6;
+    }
+    .compare-note strong { color: var(--accent-cyan); }
+
+    .data-depth-block { margin-bottom: 56px; }
+    .data-depth-label {
+      font-size: 1.1rem; font-weight: 700; color: var(--text-primary);
+      margin-bottom: 20px;
+    }
+    .data-depth-label span { color: var(--accent-cyan); }
+    .data-cats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 16px; }
+    .data-cat {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 14px; padding: 18px;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+    .data-cat:hover { transform: translateY(-4px); border-color: rgba(0,212,255,0.3); }
+    .data-cat .dc-icon { font-size: 1.5rem; margin-bottom: 8px; }
+    .data-cat .dc-name { font-size: 0.82rem; font-weight: 700; color: var(--text-primary); margin-bottom: 6px; }
+    .data-cat .dc-count { font-size: 0.7rem; color: var(--accent-cyan); font-weight: 600; margin-bottom: 6px; }
+    .data-cat .dc-items { font-size: 0.72rem; color: var(--text-muted); line-height: 1.5; }
+    .data-live-row { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 24px; }
+    .data-live-chip {
+      display: flex; align-items: center; gap: 6px;
+      background: rgba(0,229,160,0.08); border: 1px solid rgba(0,229,160,0.25);
+      border-radius: 100px; padding: 6px 14px;
+      font-size: 0.78rem; font-weight: 600; color: var(--accent-green);
+    }
+    .data-live-chip .dlc-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--accent-green); animation: pulse 2s infinite;
+    }
+
+    .roi-calc {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 20px; padding: 40px; position: relative; overflow: hidden;
+    }
+    .roi-calc::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--accent-green), var(--accent-cyan), var(--accent-green));
+      background-size: 200% 100%;
+      animation: shimmer 3s linear infinite;
+    }
+    @keyframes shimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
+
+    .roi-calc h3 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.3rem; font-weight: 700; margin-bottom: 32px;
+    }
+    .roi-timeline { display: flex; gap: 0; align-items: stretch; margin-bottom: 32px; }
+    .roi-year {
+      flex: 1; padding: 24px 20px; text-align: center;
+      border: 1px solid var(--border); position: relative;
+    }
+    .roi-year:first-child { border-radius: 14px 0 0 14px; }
+    .roi-year:last-child { border-radius: 0 14px 14px 0; }
+    .roi-year .ry-label {
+      font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.1em;
+      font-weight: 700; margin-bottom: 10px;
+    }
+    .roi-year .ry-amount {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.6rem; font-weight: 800; line-height: 1.1; margin-bottom: 6px;
+    }
+    .roi-year .ry-desc { font-size: 0.78rem; color: var(--text-muted); line-height: 1.4; }
+    .roi-year.invest { background: rgba(255,184,48,0.06); }
+    .roi-year.invest .ry-label { color: var(--accent-amber); }
+    .roi-year.invest .ry-amount { color: var(--accent-amber); }
+    .roi-year.save { background: rgba(0,229,160,0.06); }
+    .roi-year.save .ry-label { color: var(--accent-green); }
+    .roi-year.save .ry-amount { color: var(--accent-green); }
+    .roi-year.scale { background: rgba(0,212,255,0.06); }
+    .roi-year.scale .ry-label { color: var(--accent-cyan); }
+    .roi-year.scale .ry-amount { color: var(--accent-cyan); }
+
+    .roi-scenarios { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .roi-scenario {
+      padding: 20px; border-radius: 14px;
+      background: rgba(255,255,255,0.02); border: 1px solid var(--border);
+      text-align: center; transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .roi-scenario:hover { transform: translateY(-4px); box-shadow: var(--glow-green); }
+    .roi-scenario .rs-users {
+      font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.1em;
+      font-weight: 700; color: var(--text-muted); margin-bottom: 8px;
+    }
+    .roi-scenario .rs-save {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.8rem; font-weight: 800; margin-bottom: 4px;
+    }
+    .roi-scenario .rs-note { font-size: 0.75rem; color: var(--text-muted); }
+    .roi-scenario.breakeven { border-color: rgba(255,184,48,0.3); }
+    .roi-scenario.breakeven .rs-save { color: var(--accent-amber); }
+    .roi-scenario.mid .rs-save { color: var(--accent-green); }
+    .roi-scenario.high .rs-save { color: var(--accent-cyan); }
+
+    .roi-extras {
+      margin-top: 24px; display: flex; gap: 12px; flex-wrap: wrap; justify-content: center;
+    }
+    .roi-extra {
+      padding: 8px 16px; border-radius: 100px;
+      background: rgba(255,255,255,0.04); border: 1px solid var(--border);
+      font-size: 0.78rem; color: var(--text-muted); font-weight: 500;
+    }
+    .roi-extra span { color: var(--accent-green); font-weight: 700; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      section { padding: 100px 32px 60px; }
+      nav { padding: 14px 24px; }
+      .nav-links { display: none; }
+      .problem-grid, .risk-grid { grid-template-columns: 1fr; }
+      .pipeline { flex-direction: column; }
+      .pipeline-arrow { transform: rotate(90deg); align-self: center; }
+      .apis-row { grid-template-columns: repeat(2, 1fr); }
+      .tech-grid { grid-template-columns: repeat(2, 1fr); }
+      .who-grid { grid-template-columns: repeat(2, 1fr); }
+      .demo-wrapper { flex-direction: column; }
+      .demo-side { margin-left: 0; flex: auto; width: 100%; }
+      #tech { padding: 60px 32px; }
+      .invest-row { grid-template-columns: 1fr; }
+      .tam-block { grid-template-columns: 1fr; }
+      .tam-stats { grid-template-columns: 1fr 1fr; }
+      .data-cats { grid-template-columns: repeat(2, 1fr); }
+      .roi-timeline { flex-direction: column; }
+      .roi-year:first-child { border-radius: 14px 14px 0 0; }
+      .roi-year:last-child { border-radius: 0 0 14px 14px; }
+      .roi-scenarios { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Progress bar -->
+  <div class="progress-bar" id="progressBar"></div>
+
+  <!-- Floating particles -->
+  <div class="particles" id="particles"></div>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-logo">🌍 ClimateNexus</div>
+    <ul class="nav-links">
+      <li><a href="#why">The Problem</a></li>
+      <li><a href="#how">How It Works</a></li>
+      <li><a href="#risks">Risks & Solutions</a></li>
+      <li><a href="#impact">Business Impact</a></li>
+      <li><a href="#roi">Value & ROI</a></li>
+      <li><a href="#demo">Demo</a></li>
+      <li><a href="#closing">Closing</a></li>
+    </ul>
+  </nav>
+
+  <!-- ════════════════════════ HERO ════════════════════════ -->
+  <section id="hero">
+    <div class="grid-bg"></div>
+    <div class="hero-tag"><span class="dot"></span> JLL 2026 Hackathon · Problem #12 &amp; #13</div>
+    <h1 class="hero-title">
+      <span class="glow">ClimateNexus</span>
+    </h1>
+    <p class="hero-tagline"><em>Score the risk.</em> &nbsp;Prescribe the cure.</p>
+    <div class="hero-pills">
+      <div class="pill">🌊 Flood Risk</div>
+      <div class="pill">🌡️ Heat Stress</div>
+      <div class="pill">🔥 Wildfire</div>
+      <div class="pill">⚡ Seismic</div>
+      <div class="pill">⚖️ Transition Risk</div>
+      <div class="pill">📊 AI Strategy Agent</div>
+    </div>
+    <div class="hero-stat-row">
+      <div class="hero-stat">
+        <div class="big" style="color:var(--accent-cyan)">8</div>
+        <div class="lbl">Live data APIs</div>
+      </div>
+      <div class="hero-stat">
+        <div class="big" style="color:var(--accent-green)">6</div>
+        <div class="lbl">Hazard Dimensions</div>
+      </div>
+      <div class="hero-stat">
+        <div class="big" style="color:var(--accent-amber)">$0</div>
+        <div class="lbl">Data Licensing Cost</div>
+      </div>
+      <div class="hero-stat">
+        <div class="big" style="color:var(--accent-purple)">10×</div>
+        <div class="lbl">Consultant Throughput</div>
+      </div>
+      <div class="hero-stat">
+        <div class="big" style="color:var(--accent-cyan)">Sec</div>
+        <div class="lbl">vs. Days to Score</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════ WHY ════════════════════════ -->
+  <section id="why">
+    <div class="grid-bg"></div>
+    <div class="section-label">01 — The Problem</div>
+    <h2 class="section-title">JLL is flying blind<br/>on climate risk</h2>
+    <p class="section-sub">Brokers and asset managers today are stuck — climate-risk assessment is fragmented across a dozen data sources, and sustainability strategies are built in isolation from actual risk data. The result? Deals delayed, risk mispriced, clients underserved.</p>
+
+    <div class="problem-grid">
+      <div class="problem-card">
+        <div class="icon">⏳</div>
+        <h3>Risk Assessment Is Painfully Slow</h3>
+        <p>Synthesising FEMA, NOAA, local regulations, and seismic data across 8–12 fragmented sources requires days of manual research — per property.</p>
+        <div class="stat-badge">3–5 days per property</div>
+      </div>
+      <div class="problem-card">
+        <div class="icon">🧩</div>
+        <h3>Strategy Is Disconnected from Risk</h3>
+        <p>Sustainability strategies are built manually by consultants using siloed playbooks — they never reference the actual risk scores sitting in spreadsheets.</p>
+        <div class="stat-badge">Weeks per client</div>
+      </div>
+      <div class="problem-card">
+        <div class="icon">📉</div>
+        <h3>No Connected Value Chain</h3>
+        <p>Risk insight never reaches the client action plan. Brokers walk into meetings without data-backed climate intelligence, costing JLL mandates.</p>
+        <div class="stat-badge">Revenue at risk</div>
+      </div>
+    </div>
+
+    <div class="cost-row">
+      <div class="cost-card">
+        <div class="cost-icon">💸</div>
+        <div>
+          <div class="label">Expensive Vendor Contracts</div>
+          <div class="value">High Licensing Cost</div>
+        </div>
+      </div>
+      <div class="cost-card">
+        <div class="cost-icon">🌍</div>
+        <div>
+          <div class="label">Climate Regulation Pressure</div>
+          <div class="value">LL97, BERDO, Title 24</div>
+        </div>
+      </div>
+      <div class="cost-card">
+        <div class="cost-icon">📈</div>
+        <div>
+          <div class="label">Green Premium / Brown Discount</div>
+          <div class="value">Asset Value Impact</div>
+        </div>
+      </div>
+      <div class="cost-card">
+        <div class="cost-icon">🏢</div>
+        <div>
+          <div class="label">Scalability Bottleneck</div>
+          <div class="value">~5 clients / quarter</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════ HOW ════════════════════════ -->
+  <section id="how">
+    <div class="grid-bg"></div>
+    <div class="section-label">02 — How It Works</div>
+    <h2 class="section-title">Two stages. One<br/>connected pipeline.</h2>
+    <p class="section-sub">ClimateNexus chains climate-risk scoring directly into a sustainability strategy engine. The risk score isn't just a number — it becomes the input signal that drives a tailored, ROI-ranked action plan.</p>
+
+    <div class="pipeline">
+      <div class="pipeline-stage">
+        <div class="stage-num">Stage 1 · Seconds</div>
+        <h3>🗂️ Property Input</h3>
+        <ul>
+          <li>Enter any address or upload a CSV portfolio</li>
+          <li>Geocoded via Nominatim to lat/lon</li>
+          <li>Supports batch scoring of up to 200 properties</li>
+        </ul>
+      </div>
+      <div class="pipeline-arrow">→</div>
+      <div class="pipeline-stage" style="border-color: rgba(0,212,255,0.3);">
+        <div class="stage-num">Stage 1 · Climate Risk Scoring</div>
+        <h3>📡 8 APIs in Parallel</h3>
+        <ul>
+          <li>FEMA, NOAA, USFS, USGS (2×), OSM, EPA, Transition Rules</li>
+          <li>XGBoost ensemble across 6 hazard dimensions</li>
+          <li>SHAP explainability — see exactly what drives the score</li>
+          <li>Composite 0–100 risk score mapped to Expected Annual Loss</li>
+        </ul>
+      </div>
+      <div class="pipeline-arrow">→</div>
+      <div class="pipeline-stage" style="border-color: rgba(0,229,160,0.3);">
+        <div class="stage-num">Stage 2 · Strategy Agent</div>
+        <h3>🤖 LangGraph AI Agent</h3>
+        <ul>
+          <li>RAG over 14 curated sustainability knowledge docs</li>
+          <li>Finds applicable IRA credits &amp; state rebates</li>
+          <li>Calculates ROI for 9 retrofit measures</li>
+          <li>Generates ranked action plan with narrative</li>
+        </ul>
+      </div>
+      <div class="pipeline-arrow">→</div>
+      <div class="pipeline-stage" style="border-color: rgba(167,139,250,0.3);">
+        <div class="stage-num">Deliverables · Real-time</div>
+        <h3>📑 Client-Ready Output</h3>
+        <ul>
+          <li>Interactive risk heatmap (Folium)</li>
+          <li>SHAP waterfall score card</li>
+          <li>Chat-based strategy refinement</li>
+          <li>Downloadable HTML/PDF strategy deck</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="apis-row">
+      <div class="api-chip"><span class="hazard">🌊</span> FEMA NFHL — Flood Zones</div>
+      <div class="api-chip"><span class="hazard">🌡️</span> NOAA RCC-ACIS — Heat</div>
+      <div class="api-chip"><span class="hazard">🔥</span> USFS — Wildfire Probability</div>
+      <div class="api-chip"><span class="hazard">⛰️</span> USGS — Elevation & Seismic</div>
+      <div class="api-chip"><span class="hazard">🗺️</span> OpenStreetMap — Buildings</div>
+      <div class="api-chip"><span class="hazard">⚡</span> EPA ENERGY STAR — EUI</div>
+      <div class="api-chip"><span class="hazard">⚖️</span> Transition Rules Engine</div>
+      <div class="api-chip"><span class="hazard">🤖</span> Gemini 2.5 Flash — LLM</div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════ RISKS & SOLUTIONS ════════════════════════ -->
+  <section id="risks">
+    <div class="grid-bg"></div>
+    <div class="section-label">03 — Risks &amp; How We Solve Them</div>
+    <h2 class="section-title">Every hazard. Every<br/>property. Every market.</h2>
+    <p class="section-sub">ClimateNexus doesn't just flag risk — it bridges the gap between a risk signal and a prescriptive, financially-calibrated action. Here's how we tackle each hazard dimension.</p>
+
+    <div class="risk-grid">
+      <div class="risk-card">
+        <div class="risk-header">
+          <div class="risk-icon">🌊</div>
+          <h3>Flood Risk</h3>
+          <div class="score-badge score-high">HIGH IMPACT</div>
+        </div>
+        <div class="risk-solution">
+          <div class="risk-side problem-side">
+            <div class="side-label">❌ The Risk</div>
+            <p>FEMA Zone AE/VE designation, SFHA status, low elevation — leading to forced insurance renegotiation and stranded assets in coastal portfolios.</p>
+          </div>
+          <div class="risk-side solution-side">
+            <div class="side-label">✅ ClimateNexus Fix</div>
+            <p>Real-time FEMA API scoring → recommends flood barriers, elevated mechanicals, FEMA Hazard Mitigation Grants, and resilience-first underwriting.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="risk-card">
+        <div class="risk-header">
+          <div class="risk-icon">🌡️</div>
+          <h3>Extreme Heat Stress</h3>
+          <div class="score-badge score-high">HIGH IMPACT</div>
+        </div>
+        <div class="risk-solution">
+          <div class="risk-side problem-side">
+            <div class="side-label">❌ The Risk</div>
+            <p>80+ projected extreme heat days, high cooling degree days (Phoenix, Dallas, Austin) → HVAC overload, tenant comfort crises, energy cost spikes.</p>
+          </div>
+          <div class="risk-side solution-side">
+            <div class="side-label">✅ ClimateNexus Fix</div>
+            <p>NOAA 30-year climate normals → cool-roof retrofits, heat pump upgrades, IRA §48 energy efficiency tax credits, shade &amp; greenery interventions.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="risk-card">
+        <div class="risk-header">
+          <div class="risk-icon">🔥</div>
+          <h3>Wildfire Proximity</h3>
+          <div class="score-badge score-med">MEDIUM IMPACT</div>
+        </div>
+        <div class="risk-solution">
+          <div class="risk-side problem-side">
+            <div class="side-label">❌ The Risk</div>
+            <p>WUI-adjacent properties in California and Colorado face annual burn probability risk, insurance non-renewal, and devaluation of surrounding assets.</p>
+          </div>
+          <div class="risk-side solution-side">
+            <div class="side-label">✅ ClimateNexus Fix</div>
+            <p>USFS burn probability scoring → ember-resistant materials, defensible space planning, wildfire insurance optimization, and risk-informed capital planning.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="risk-card">
+        <div class="risk-header">
+          <div class="risk-icon">⚡</div>
+          <h3>Seismic &amp; Transition Risk</h3>
+          <div class="score-badge score-high">HIGH IMPACT</div>
+        </div>
+        <div class="risk-solution">
+          <div class="risk-side problem-side">
+            <div class="side-label">❌ The Risk</div>
+            <p>Seismic Design Category D/E (SF, LA, Seattle) + regulatory exposure from LL97, BERDO, Title 24 — creating compliance fines and retrofit liability.</p>
+          </div>
+          <div class="risk-side solution-side">
+            <div class="side-label">✅ ClimateNexus Fix</div>
+            <p>USGS Design Maps API + built-in regulation engine → compliance pathway acceleration, LEED/WELL certification roadmaps, and retrofit prioritization ranked by ROI.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════ IMPACT ════════════════════════ -->
+  <section id="impact">
+    <div class="grid-bg"></div>
+    <div class="section-label">04 — Business Impact</div>
+    <h2 class="section-title">How JLL wins with<br/>ClimateNexus</h2>
+    <p class="section-sub">The numbers speak for themselves. ClimateNexus transforms every stage of JLL's advisory workflow — from weeks to minutes, from expensive to free, from limited to unlimited scale.</p>
+
+    <table class="impact-table">
+      <thead>
+        <tr>
+          <th>Metric</th>
+          <th>Before ClimateNexus</th>
+          <th>After ClimateNexus</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="metric">Risk assessment time</td>
+          <td class="before">3–5 days per property</td>
+          <td class="after">⚡ Seconds</td>
+        </tr>
+        <tr>
+          <td class="metric">Strategy creation</td>
+          <td class="before">Weeks per client</td>
+          <td class="after">⚡ Minutes</td>
+        </tr>
+        <tr>
+          <td class="metric">Data licensing cost</td>
+          <td class="before">Expensive vendor contracts</td>
+          <td class="after">💚 $0 (100% open data)</td>
+        </tr>
+        <tr>
+          <td class="metric">Consultant throughput</td>
+          <td class="before">~5 clients per quarter</td>
+          <td class="after">🚀 10× more capacity</td>
+        </tr>
+        <tr>
+          <td class="metric">Scalability</td>
+          <td class="before">Limited by headcount</td>
+          <td class="after">🌍 Any market, globally</td>
+        </tr>
+        <tr>
+          <td class="metric">Portfolio scoring</td>
+          <td class="before">One property at a time</td>
+          <td class="after">📊 200 properties in one upload</td>
+        </tr>
+        <tr>
+          <td class="metric">Client deliverable</td>
+          <td class="before">Generic, consultant-authored PDF</td>
+          <td class="after">🤖 Bespoke AI-generated strategy deck</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="who-grid">
+      <div class="who-card">
+        <div class="icon">🤝</div>
+        <h4>Brokers</h4>
+        <p>Walk into every client meeting with instant, data-backed climate intelligence. No more guesswork.</p>
+      </div>
+      <div class="who-card">
+        <div class="icon">📈</div>
+        <h4>Asset Managers</h4>
+        <p>Portfolio-level risk heatmap with prioritised resilience investments across hundreds of properties.</p>
+      </div>
+      <div class="who-card">
+        <div class="icon">🏢</div>
+        <h4>Clients</h4>
+        <p>Personalised sustainability roadmaps with real ROI — not generic advice — including IRA credits &amp; rebates.</p>
+      </div>
+      <div class="who-card">
+        <div class="icon">🏆</div>
+        <h4>JLL</h4>
+        <p>Differentiate advisory services; win more mandates in sustainability consulting. Integrates with Falcon, Azara &amp; Carbon Pathfinder.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════ VALUE / ROI ════════════════════════ -->
+  <section id="roi">
+    <div class="grid-bg"></div>
+    <div class="section-label">05 — Value to JLL</div>
+    <h2 class="section-title">The business case for<br/><span style="background:linear-gradient(135deg,var(--accent-cyan),var(--accent-green));-webkit-background-clip:text;-webkit-text-fill-color:transparent">ClimateNexus</span></h2>
+    <p class="section-sub">A focused investment with outsized returns. Zero data licensing, massive addressable market, and a clear path to ROI — all built on free, open US government data.</p>
+
+    <!-- Investment Snapshot -->
+    <div class="invest-row">
+      <div class="invest-card">
+        <div class="ic-icon">💰</div>
+        <div class="ic-value">$200K</div>
+        <div class="ic-label">Total investment to develop, test &amp; deploy</div>
+      </div>
+      <div class="invest-card">
+        <div class="ic-icon">⚡</div>
+        <div class="ic-value">2 mo</div>
+        <div class="ic-label">From kickoff to production deployment</div>
+      </div>
+      <div class="invest-card">
+        <div class="ic-icon">🇺🇸</div>
+        <div class="ic-value">USA</div>
+        <div class="ic-label">Initial focus — US market, all 50 states</div>
+      </div>
+    </div>
+
+    <!-- TAM / Market Opportunity -->
+    <div class="tam-block">
+      <div class="tam-stats">
+        <div class="tam-stat">
+          <div class="ts-num">5.9M</div>
+          <div class="ts-label">Commercial buildings<br/>in the United States</div>
+        </div>
+        <div class="tam-stat">
+          <div class="ts-num">96.4B</div>
+          <div class="ts-label">Square feet of<br/>total floorspace</div>
+        </div>
+        <div class="tam-stat">
+          <div class="ts-num">~16,300</div>
+          <div class="ts-label">Avg building size<br/>(sq ft)</div>
+        </div>
+        <div class="tam-stat">
+          <div class="ts-num">$0</div>
+          <div class="ts-label">Data licensing cost<br/>per building</div>
+        </div>
+      </div>
+      <div class="tam-narrative">
+        <h3>🎯 The Opportunity</h3>
+        <p>Every one of those <strong style="color:var(--accent-cyan)">5.9 million buildings</strong> needs climate risk assessment. Today, that's a manual, multi-day process — or a $15K+/year CoStar subscription that doesn't even focus on climate risk.</p>
+        <p>ClimateNexus can score <strong style="color:var(--accent-green)">any US address in seconds</strong>, for free, using 8 live government APIs. JLL gets first-mover advantage in an exploding market — while competitors are still paying for vendor contracts.</p>
+        <div class="tam-source">Source: <a href="https://www.eia.gov/energyexplained/use-of-energy/commercial-buildings.php" target="_blank">EIA Commercial Buildings Energy Consumption Survey (CBECS)</a>, 2018 data</div>
+      </div>
+    </div>
+
+    <!-- CoStar Comparison -->
+    <div class="compare-block">
+      <div class="data-depth-label">📊 How ClimateNexus compares to <span>CoStar</span></div>
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th style="width:28%">Capability</th>
+            <th class="costar-col" style="width:36%">CoStar</th>
+            <th class="cn-col" style="width:36%">ClimateNexus</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Annual cost per user</td>
+            <td>$9,000 – $40,000/yr</td>
+            <td>$0 data licensing ✅</td>
+          </tr>
+          <tr>
+            <td>Climate risk scoring</td>
+            <td>Not primary focus ❌</td>
+            <td>6-hazard real-time scoring ✅</td>
+          </tr>
+          <tr>
+            <td>Sustainability strategy</td>
+            <td>Not included ❌</td>
+            <td>AI-generated, ROI-ranked ✅</td>
+          </tr>
+          <tr>
+            <td>Data sources</td>
+            <td>Proprietary, licensed</td>
+            <td>8+ US Gov APIs (free, open) ✅</td>
+          </tr>
+          <tr>
+            <td>Explainability</td>
+            <td>Limited transparency</td>
+            <td>SHAP decomposition per hazard ✅</td>
+          </tr>
+          <tr>
+            <td>Batch portfolio scoring</td>
+            <td>Manual per-property</td>
+            <td>200 properties in one upload ✅</td>
+          </tr>
+          <tr>
+            <td>Regulatory compliance</td>
+            <td>Separate research</td>
+            <td>Built-in: LL97, BERDO, Title 24 ✅</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="compare-note">
+        <strong>⚖️ Fair context:</strong> CoStar provides broader CRE data — comps, leasing, sales, tenant info — that is out of scope here. ClimateNexus is a <strong>focused climate-risk &amp; sustainability layer</strong> that complements, rather than replaces, CoStar's core CRE offering.
+      </div>
+    </div>
+
+    <!-- Data Depth -->
+    <div class="data-depth-block">
+      <div class="data-depth-label">📡 Data depth: <span>8 live APIs today</span> — 30+ sources on the roadmap</div>
+      <div class="data-live-row">
+        <div class="data-live-chip"><span class="dlc-dot"></span> FEMA NFHL</div>
+        <div class="data-live-chip"><span class="dlc-dot"></span> NOAA RCC-ACIS</div>
+        <div class="data-live-chip"><span class="dlc-dot"></span> USFS Wildfire</div>
+        <div class="data-live-chip"><span class="dlc-dot"></span> USGS Elevation</div>
+        <div class="data-live-chip"><span class="dlc-dot"></span> USGS Seismic</div>
+        <div class="data-live-chip"><span class="dlc-dot"></span> OpenStreetMap</div>
+        <div class="data-live-chip"><span class="dlc-dot"></span> EPA ENERGY STAR</div>
+        <div class="data-live-chip"><span class="dlc-dot"></span> Transition Rules</div>
+      </div>
+      <div class="data-cats">
+        <div class="data-cat">
+          <div class="dc-icon">🌊</div>
+          <div class="dc-name">Flood &amp; Coastal</div>
+          <div class="dc-count">4 sources</div>
+          <div class="dc-items">NOAA Sea Level Rise · USACE Levees · NASA GRACE Groundwater · FEMA NFIP Claims</div>
+        </div>
+        <div class="data-cat">
+          <div class="dc-icon">🌡️</div>
+          <div class="dc-name">Heat &amp; Climate</div>
+          <div class="dc-count">4 sources</div>
+          <div class="dc-items">NASA NEX-GDDP-CMIP6 · CDC Heat Illness · Urban Heat Islands · PRISM Climate Data</div>
+        </div>
+        <div class="data-cat">
+          <div class="dc-icon">🔥</div>
+          <div class="dc-name">Wildfire</div>
+          <div class="dc-count">3 sources</div>
+          <div class="dc-items">NIFC Perimeters · MTBS Burn Severity · FPA FOD 1.88M Wildfires</div>
+        </div>
+        <div class="data-cat">
+          <div class="dc-icon">🌪️</div>
+          <div class="dc-name">Severe Weather</div>
+          <div class="dc-count">3 sources</div>
+          <div class="dc-items">NOAA Storm Events · IBTrACS Cyclones · FEMA Disaster Declarations</div>
+        </div>
+        <div class="data-cat">
+          <div class="dc-icon">🏗️</div>
+          <div class="dc-name">Building &amp; Infra</div>
+          <div class="dc-count">3 sources</div>
+          <div class="dc-items">DOE Building Performance · EIA CBECS · Microsoft 130M Footprints</div>
+        </div>
+        <div class="data-cat">
+          <div class="dc-icon">🌍</div>
+          <div class="dc-name">Environmental</div>
+          <div class="dc-count">4 sources</div>
+          <div class="dc-items">EPA EJScreen · DSIRE Incentives · CDP/GRESB ESG · EU Taxonomy</div>
+        </div>
+        <div class="data-cat">
+          <div class="dc-icon">💰</div>
+          <div class="dc-name">Financial</div>
+          <div class="dc-count">3 sources</div>
+          <div class="dc-items">Zillow ZTRAX · FHFA House Price Index · Moody's Climate Risk</div>
+        </div>
+        <div class="data-cat">
+          <div class="dc-icon">🚀</div>
+          <div class="dc-name">Total Roadmap</div>
+          <div class="dc-count" style="color:var(--accent-green)">30+ sources</div>
+          <div class="dc-items">All free / open data. Zero vendor lock-in. Infinite scalability.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ROI Calculator -->
+    <div class="roi-calc">
+      <h3>📈 ROI Break-Even Analysis <span style="font-weight:400;font-size:0.85rem;color:var(--text-muted)">(vs. CoStar at ~$15K/user/year)</span></h3>
+
+      <div class="roi-timeline">
+        <div class="roi-year invest">
+          <div class="ry-label">Year 1</div>
+          <div class="ry-amount">-$200K</div>
+          <div class="ry-desc">Build, test &amp; deploy.<br/>2 months to production.</div>
+        </div>
+        <div class="roi-year save">
+          <div class="ry-label">Year 2</div>
+          <div class="ry-amount">$0 licensing</div>
+          <div class="ry-desc">Zero data cost per user.<br/>Only infra &amp; maintenance.</div>
+        </div>
+        <div class="roi-year scale">
+          <div class="ry-label">Year 3+</div>
+          <div class="ry-amount">Scale</div>
+          <div class="ry-desc">Add users at near-zero marginal cost. Expand to global markets.</div>
+        </div>
+      </div>
+
+      <div class="roi-scenarios">
+        <div class="roi-scenario breakeven">
+          <div class="rs-users">Break-Even Point</div>
+          <div class="rs-save">14 users</div>
+          <div class="rs-note">14 × $15K = $210K<br/>ClimateNexus pays for itself</div>
+        </div>
+        <div class="roi-scenario mid">
+          <div class="rs-users">50 JLL Users</div>
+          <div class="rs-save">$750K</div>
+          <div class="rs-note">Annual CoStar equivalent saved<br/>3.75× return on investment</div>
+        </div>
+        <div class="roi-scenario high">
+          <div class="rs-users">100 JLL Users</div>
+          <div class="rs-save">$1.5M</div>
+          <div class="rs-note">Annual CoStar equivalent saved<br/>7.5× return on investment</div>
+        </div>
+      </div>
+
+      <div class="roi-extras">
+        <div class="roi-extra"><span>+</span> Consultant time saved (10× throughput)</div>
+        <div class="roi-extra"><span>+</span> Faster deal cycles</div>
+        <div class="roi-extra"><span>+</span> Won mandates from climate intelligence</div>
+        <div class="roi-extra"><span>+</span> Green premium capture</div>
+        <div class="roi-extra"><span>+</span> Regulatory compliance acceleration</div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ════════════════════════ DEMO ════════════════════════ -->
+  <section id="demo">
+    <div class="grid-bg"></div>
+    <div class="section-label">06 — Demo Scenario</div>
+    <h2 class="section-title">From CSV upload to<br/>client-ready deck</h2>
+    <p class="section-sub">Imagine a JLL broker pitching to a real estate fund with properties across the US. Here's what ClimateNexus does in one workflow.</p>
+
+    <div class="demo-wrapper">
+      <div class="demo-steps">
+        <div class="demo-step">
+          <div class="step-num">1</div>
+          <div>
+            <h4>Upload Portfolio</h4>
+            <p>Broker uploads a CSV of property addresses. ClimateNexus geocodes every address and fires <em>8 live APIs in parallel</em> — all in the background.</p>
+          </div>
+        </div>
+        <div class="demo-step">
+          <div class="step-num">2</div>
+          <div>
+            <h4>Score in Seconds</h4>
+            <p>Every property gets a 0–100 composite risk score across 6 hazard dimensions, with <em>SHAP explainability</em> showing exactly which hazard is driving it.</p>
+          </div>
+        </div>
+        <div class="demo-step">
+          <div class="step-num">3</div>
+          <div>
+            <h4>Auto-Generate Strategy</h4>
+            <p>The LangGraph AI agent synthesises risk scores + sustainability knowledge + incentive data into a <em>ranked action plan</em>: flood barriers for coastal sites, cool-roof retrofits for heat-stressed ones, LL97 compliance for NYC.</p>
+          </div>
+        </div>
+        <div class="demo-step">
+          <div class="step-num">4</div>
+          <div>
+            <h4>Refine via Chat</h4>
+            <p>Broker asks: <em>"What about solar?"</em> — the agent adds solar PV with IRA 30% Investment Tax Credit and updated payback calculations.</p>
+          </div>
+        </div>
+        <div class="demo-step">
+          <div class="step-num">5</div>
+          <div>
+            <h4>Deliver the Deck</h4>
+            <p>A branded, <em>client-ready strategy PDF</em> — ready for Monday's meeting. Complete with financial impact summary, regulatory compliance check, and ROI-ranked actions.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="demo-side">
+        <div class="demo-screen">
+          <div class="screen-bar">
+            <div class="screen-dot" style="background:#ff5f57"></div>
+            <div class="screen-dot" style="background:#febc2e"></div>
+            <div class="screen-dot" style="background:#28c840"></div>
+            <span style="font-size:0.75rem;color:var(--text-muted);margin-left:8px">ClimateNexus — Portfolio Scorer</span>
+          </div>
+          <div class="screen-pad">
+            <div style="font-size:0.75rem;color:var(--text-muted);margin-bottom:8px">350 5th Ave, New York, NY</div>
+            <div class="mock-score">
+              <div class="score-big" id="animScore">72</div>
+              <div class="score-label">Composite Risk Score (0–100)</div>
+            </div>
+            <div class="mock-bars">
+              <div class="mock-bar-row">
+                <div class="bl">🌊 Flood</div>
+                <div class="bar-track"><div class="bar-fill" style="width:82%;background:linear-gradient(90deg,#ff5c5c,#ff8c42)"></div></div>
+                <div class="bar-val" style="color:var(--accent-red)">82</div>
+              </div>
+              <div class="mock-bar-row">
+                <div class="bl">🌡️ Heat</div>
+                <div class="bar-track"><div class="bar-fill" style="width:55%;background:linear-gradient(90deg,#ffb830,#ffda44)"></div></div>
+                <div class="bar-val" style="color:var(--accent-amber)">55</div>
+              </div>
+              <div class="mock-bar-row">
+                <div class="bl">🔥 Wildfire</div>
+                <div class="bar-track"><div class="bar-fill" style="width:12%;background:linear-gradient(90deg,#00e5a0,#00d4ff)"></div></div>
+                <div class="bar-val" style="color:var(--accent-green)">12</div>
+              </div>
+              <div class="mock-bar-row">
+                <div class="bl">⚡ Seismic</div>
+                <div class="bar-track"><div class="bar-fill" style="width:35%;background:linear-gradient(90deg,#a78bfa,#818cf8)"></div></div>
+                <div class="bar-val" style="color:var(--accent-purple)">35</div>
+              </div>
+              <div class="mock-bar-row">
+                <div class="bl">⚖️ Transition</div>
+                <div class="bar-track"><div class="bar-fill" style="width:90%;background:linear-gradient(90deg,#ff5c5c,#ff8c42)"></div></div>
+                <div class="bar-val" style="color:var(--accent-red)">90</div>
+              </div>
+              <div class="mock-bar-row">
+                <div class="bl">⛰️ Elevation</div>
+                <div class="bar-track"><div class="bar-fill" style="width:48%;background:linear-gradient(90deg,#ffb830,#ffda44)"></div></div>
+                <div class="bar-val" style="color:var(--accent-amber)">48</div>
+              </div>
+            </div>
+            <div style="margin-top:20px;padding:14px;background:rgba(0,229,160,0.06);border:1px solid rgba(0,229,160,0.2);border-radius:10px">
+              <div style="font-size:0.72rem;color:var(--accent-green);font-weight:700;margin-bottom:6px">🤖 TOP RECOMMENDATION</div>
+              <div style="font-size:0.8rem;color:var(--text-muted);line-height:1.5">LL97 compliance pathway acceleration required by 2030. Estimated penalty avoidance: <span style="color:var(--accent-green);font-weight:700">$340K/yr</span>. IRA §45L credit applicable.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════ TECH ════════════════════════ -->
+  <section id="tech">
+    <div class="grid-bg"></div>
+    <div class="section-label">07 — Tech Stack</div>
+    <h2 class="section-title" style="margin-bottom:40px">Production-grade.<br/>Open-source. Scalable.</h2>
+    <div class="tech-grid">
+      <div class="tech-card">
+        <div class="t-label">API Framework</div>
+        <div class="t-name">FastAPI + Uvicorn</div>
+        <div class="t-desc">Async REST API with Pydantic validation, Swagger docs, and batch endpoints supporting up to 200 properties.</div>
+      </div>
+      <div class="tech-card">
+        <div class="t-label">ML Scoring Engine</div>
+        <div class="t-name">XGBoost Ensemble + SHAP</div>
+        <div class="t-desc">6-hazard weighted composite scorer with SHAP-style decomposition for full explainability of every risk score.</div>
+      </div>
+      <div class="tech-card">
+        <div class="t-label">AI Agent Framework</div>
+        <div class="t-name">LangGraph State Machine</div>
+        <div class="t-desc">Multi-step agentic workflow: analyze → retrieve → find incentives → calculate ROI → generate strategy.</div>
+      </div>
+      <div class="tech-card">
+        <div class="t-label">Language Model</div>
+        <div class="t-name">Google Gemini 2.5 Flash</div>
+        <div class="t-desc">Powers the strategy generation, chat refinement, and narrative synthesis across all recommendations.</div>
+      </div>
+      <div class="tech-card">
+        <div class="t-label">RAG Knowledge Base</div>
+        <div class="t-name">ChromaDB + Gemini Embeddings</div>
+        <div class="t-desc">14 curated sustainability docs (LEED, IRA, LL97, BERDO) chunked to 800 tokens and semantically retrieved.</div>
+      </div>
+      <div class="tech-card">
+        <div class="t-label">Frontend</div>
+        <div class="t-name">Streamlit + Folium + Plotly</div>
+        <div class="t-desc">Multi-page app with interactive risk heatmap, SHAP waterfall charts, chat interface, and PDF export.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════ CLOSING ════════════════════════ -->
+  <section id="closing">
+    <div class="grid-bg"></div>
+    <div class="section-label">08 — Why Now. Why JLL.</div>
+    <h2 class="closing-title">
+      From fragmented data<br/>to <span class="highlight">client-ready strategy</span><br/>in seconds.
+    </h2>
+    <p class="closing-sub">ClimateNexus is the only platform that connects climate-risk scoring directly to a sustainability action plan — the way JLL's advisory actually works. Not a dashboard. Not a scorecard. A complete intelligence layer.</p>
+
+    <div class="cta-row">
+      <a href="#demo" class="btn-primary">🎯 See the Demo</a>
+      <a href="#how" class="btn-outline">⚙️ How It Works</a>
+    </div>
+
+    <div class="jll-integrations">
+      <div class="jll-chip">Integrates with <span>JLL Falcon</span></div>
+      <div class="jll-chip">Extends <span>Carbon Pathfinder</span></div>
+      <div class="jll-chip">Powers <span>JLL Azara</span> analytics</div>
+      <div class="jll-chip">Scales <span>Sustainability Risk Advisory</span></div>
+    </div>
+
+    <div style="margin-top:64px;padding:24px 32px;background:var(--bg-card);border:1px solid var(--border);border-radius:16px;max-width:600px;text-align:left">
+      <div style="font-size:0.75rem;color:var(--accent-cyan);font-weight:700;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:12px">Built for JLL 2026 Hackathon · Problem Statements #12 &amp; #13</div>
+      <div style="display:flex;gap:24px;flex-wrap:wrap">
+        <div>
+          <div style="font-size:0.78rem;color:var(--text-muted);margin-bottom:2px">Platform</div>
+          <div style="font-weight:700">ClimateNexus</div>
+        </div>
+        <div>
+          <div style="font-size:0.78rem;color:var(--text-muted);margin-bottom:2px">Stack</div>
+          <div style="font-weight:700">FastAPI · LangGraph · Gemini · Streamlit</div>
+        </div>
+        <div>
+          <div style="font-size:0.78rem;color:var(--text-muted);margin-bottom:2px">Data Cost</div>
+          <div style="font-weight:700;color:var(--accent-green)">$0</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // ── Progress bar
+    window.addEventListener('scroll', () => {
+      const scrolled = window.scrollY;
+      const total = document.documentElement.scrollHeight - window.innerHeight;
+      document.getElementById('progressBar').style.width = (scrolled / total * 100) + '%';
+    });
+
+    // ── Particles
+    const container = document.getElementById('particles');
+    for (let i = 0; i < 18; i++) {
+      const p = document.createElement('div');
+      p.className = 'particle';
+      const size = Math.random() * 120 + 40;
+      p.style.cssText = `
+        width:${size}px; height:${size}px;
+        left:${Math.random() * 100}%;
+        animation-duration:${Math.random() * 20 + 15}s;
+        animation-delay:${Math.random() * 20}s;
+      `;
+      if (i % 3 === 1) p.style.background = 'radial-gradient(circle, var(--accent-green) 0%, transparent 70%)';
+      if (i % 3 === 2) p.style.background = 'radial-gradient(circle, var(--accent-purple) 0%, transparent 70%)';
+      container.appendChild(p);
+    }
+
+    // ── Intersection Observer for stagger animations
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.problem-card, .risk-card, .tech-card, .who-card, .demo-step, .pipeline-stage, .invest-card, .tam-stat, .data-cat, .roi-scenario, .roi-year').forEach((el, i) => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(30px)';
+      el.style.transition = `opacity 0.5s ease ${i * 0.08}s, transform 0.5s ease ${i * 0.08}s`;
+      observer.observe(el);
+    });
+
+    // ── Animated score counter
+    const scoreEl = document.getElementById('animScore');
+    let scoreAnimated = false;
+    const scoreObserver = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting && !scoreAnimated) {
+        scoreAnimated = true;
+        let current = 0;
+        const target = 72;
+        const step = () => {
+          current = Math.min(current + 2, target);
+          scoreEl.textContent = current;
+          if (current < target) requestAnimationFrame(step);
+        };
+        requestAnimationFrame(step);
+      }
+    }, { threshold: 0.5 });
+    scoreObserver.observe(scoreEl);
+  </script>
+</body>
+</html>
