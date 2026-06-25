@@ -17,6 +17,15 @@ An end-to-end AI platform that scores multi-hazard climate risk on any commercia
 
 ---
 
+## 🌐 Live Demo
+
+| | URL |
+|--|-----|
+| **🖥️ Frontend (Streamlit)** | [jll-hackathon.streamlit.app](https://jll-hackathon.streamlit.app/) |
+| **⚡ Backend API (Swagger)** | [jll-hackathon-jun-2026.onrender.com/docs](https://jll-hackathon-jun-2026.onrender.com/docs) |
+
+---
+
 ## 🔍 Overview
 
 JLL brokers and asset managers face two disconnected pain points: **climate-risk assessment** (fragmented across 8–12 data sources, taking 3–5 days per property) and **sustainability strategy** (built manually by consultants over weeks). ClimateNexus **connects both** — mirroring how JLL's advisory actually works.
